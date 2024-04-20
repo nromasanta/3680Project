@@ -58,6 +58,20 @@
   margin-top: 10px;
 }
 
+.login-return {
+  display: flex;
+  justify-content: flex-start;
+  align-items: flex-start;
+  text-align: start;
+  width: 100%;
+  padding-left: 25px;
+  padding-bottom: 10px;
+}
+
+.login-return:hover {
+  text-decoration: underline;
+}
+
 .signup-title-text {
   margin-top: 10px;
   color: rgba(0,0,0,0.75)

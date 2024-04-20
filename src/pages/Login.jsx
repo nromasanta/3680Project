@@ -1,5 +1,6 @@
 import React from 'react'
 import '../styles/Signup.css'
+import { Link } from 'react-router-dom'
 
 const Login = () => {
   return (
@@ -7,6 +8,11 @@ const Login = () => {
       <div className='login-container'>
         <form className='signup-form'>
           <div className='login-title'>
+            <div className='login-return'>
+              <Link to="/">
+                &#60; &#160;Go Back
+              </Link>
+            </div>
             <h1>Welcome Back!</h1>
             <p className='signup-title-text'>We're happy to have you here!</p>
           </div>
@@ -33,7 +39,7 @@ const Login = () => {
               <button className="signup-button">
                 Log In
               </button>
-              <a href=''>
+              <a href='/signup'>
                 <p className='signup-button-link'>Don't have an Account?</p>
               </a>
             </div>

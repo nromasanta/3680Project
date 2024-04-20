@@ -1,55 +1,60 @@
-import React, { useEffect, useState } from 'react'
-import './Navbar.css'
-import placeholder from '../../imgs/placeholder.png'
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import './Navbar.css';
+import placeholder from '../../imgs/placeholder.png';
+import { Link, useLocation } from 'react-router-dom';
 
 const Navbar = () => {
-
+  const location = useLocation();
   const [sticky, setSticky] = useState(false);
 
   useEffect(() => {
-    window.addEventListener('scroll', ()=> {
+    const handleScroll = () => {
       window.scrollY > 600 ? setSticky(true) : setSticky(false);
-    })
-  }, [])
+    };
 
-  return (
-    <nav className={`container ${sticky ? 'dark-nav' : ''}`}>
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, []);
+
+  const displayNavbar = () => {
+    const excludePathnames = ['/login', '/signup'];
+    return !excludePathnames.includes(location.pathname);
+  };
+
+  const darkBackground = () => {
+    const darkBackgroundPathnames = ['/create', '/toprated', '/challenging', '/allquizzes'];
+    return displayNavbar() && (darkBackgroundPathnames.includes(location.pathname) || location.pathname === '');
+  };
+
+  return displayNavbar() ? (
+    <nav className={`container ${sticky || darkBackground() ? 'dark-nav' : ''}`}>
       <a href='/'>
         <img src={placeholder} alt="placeholder" className="logo"/>
       </a>
       <ul>
         <li>
-          <a href='/create'>
-            Create
-          </a>
+          <Link to='/create'>Create</Link>
         </li>
         <li>
-          <a href='/toprated'>
-            Top Rated
-          </a>
+          <Link to='/toprated'>Top Rated</Link>
         </li>
         <li>
-          <a href='/challenging'>
-            Challenging
-          </a>
+          <Link to='/challenging'>Challenging</Link>
         </li>
         <li>
-          <a href='/allquizzes'>
-            All Quizzes
-          </a>
+          <Link to='/allquizzes'>All Quizzes</Link>
         </li>
         <li>
-          <a href='/login'>
-            <button className="btn">
-                Login/Register
-            </button>
-          </a>
+          <Link to='/login'>
+            <button className="btn">Login/Register</button>
+          </Link>
         </li>
       </ul>
-
     </nav>
-  )
-}
+  ) : null;
+};
 
-export default Navbar
+export default Navbar;

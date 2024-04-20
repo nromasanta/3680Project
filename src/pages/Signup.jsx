@@ -1,5 +1,6 @@
 import React from 'react'
 import '../styles/Signup.css'
+import { Link } from 'react-router-dom'
 
 const Signup = () => {
   return (
@@ -7,6 +8,11 @@ const Signup = () => {
     <div className='signup-container'>
       <form className='signup-form'>
         <div className='signup-title'>
+          <div className='login-return'>
+            <Link to="/">
+              &#60; &#160;Go Back
+            </Link>
+          </div>
           <h1>Create an Account</h1>
           <p className='signup-title-text'>Thanks for joining us!</p>
         </div>
@@ -47,7 +53,7 @@ const Signup = () => {
                 <span className='signup-button-link'>{' '}Terms of Service.</span>
               </a>
             </p>
-            <a href=''>
+            <a href='/login'>
               <p className='signup-button-link'>Already have an account?</p>
             </a>
           </div>
