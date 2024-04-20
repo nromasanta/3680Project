@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from './components/Navbar/Navbar.jsx'
+import Footer from './components/Footer/Footer.jsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { IconContext } from 'react-icons'
 
@@ -28,6 +29,7 @@ const App = () => {
             <Route path="/toprated" element={<TopRated />}/>
           </Routes>
         </div>
+        <Footer/>
       </BrowserRouter>
     </div>
     </IconContext.Provider>
