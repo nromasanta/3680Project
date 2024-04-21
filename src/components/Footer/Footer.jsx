@@ -4,6 +4,7 @@ import { useLocation, Link } from 'react-router-dom';
 import { IconContext } from 'react-icons';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
 import placeholder from '../../imgs/placeholder.png';
+import Navlink from '../Navbar/Navlink.jsx'
 
 const Footer = () => {
   const location = useLocation();
@@ -18,28 +19,26 @@ const Footer = () => {
       <div className='footer-section'>
         <div className='footer-links'>
           <div className='footer-links-div'>
-            <Link to='/'>
+            <Navlink href='/'>
               <p className='footer-link'>
                 Terms & Conditions
               </p>
-            </Link>
-            <Link to='/' className='footer-link'>
-              <p>
+            </Navlink>
+            <Navlink href='/'>
+              <p className='footer-link'>
                 Privacy Policy
               </p>
-            </Link>
-            <Link 
-              to='https://github.com/nromasanta/3680Project' 
-              className='footer-link'>
-              <p>
+            </Navlink>
+            <Navlink href='https://github.com/nromasanta/3680Project'>
+              <p className='footer-link'>
                 Source Code
               </p>
-            </Link>
-            <Link to='/' className='footer-link'>
-              <p>
+            </Navlink>
+            <Navlink href='/'>
+              <p className='footer-link'>
                 Contact Us
               </p>
-            </Link>
+            </Navlink>
           </div>
           <div>
             <img src={placeholder} className='footer-logo'/>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import './Navbar.css';
 import placeholder from '../../imgs/placeholder.png';
 import { Link, useLocation } from 'react-router-dom';
+import Navlink from './Navlink.jsx'
 
 const Navbar = () => {
   const location = useLocation();
@@ -36,20 +37,28 @@ const Navbar = () => {
       </a>
       <ul>
         <li>
-          <Link to='/create'>Create</Link>
+          <Navlink className='' href='/create'>
+            Create
+          </Navlink>
         </li>
         <li>
-          <Link to='/toprated'>Top Rated</Link>
+          <Navlink className='' href='/toprated'>
+            Top Rated
+          </Navlink>
         </li>
         <li>
-          <Link to='/challenging'>Challenging</Link>
+          <Navlink className='' href='/challenging'>
+            Challenging
+          </Navlink>
         </li>
         <li>
-          <Link to='/allquizzes'>All Quizzes</Link>
+          <Navlink className='' href='/allquizzes'>
+            All Quizzes
+          </Navlink>
         </li>
         <li>
           <Link to='/login'>
-            <button className="btn">Login/Register</button>
+            <button className='login-btn'>Login/Register</button>
           </Link>
         </li>
       </ul>

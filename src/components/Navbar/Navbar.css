@@ -23,7 +23,30 @@ nav ul li {
     font-size: 16px;
 }
 
+nav ul li:hover {
+    color: darkgray;
+}
 .dark-nav {
     background: #000;
-    transition: 0.5s;
+    transition: 0.4s ease;
+}
+
+.login-btn {
+    background: #fff;
+    color: #212121;
+    padding: 14px 25px;
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    border: 0;
+    outline: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-btn:hover {
+    background-color: #3a3b3c;
+    color: #fff;
+    transition: 0.2s ease;
 }
