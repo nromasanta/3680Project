@@ -1,6 +1,5 @@
 .footer  {
   width: 100%;
-  height: 20vh;
   background: #000;
   color: #fff;
   display: flex;
@@ -8,6 +7,71 @@
   justify-content: space-between;
 }
 
-.logo {
-  width: 180px;
+.footer-section {
+  padding: 1.5rem 1.5rem;
+  width: 100%;
 }
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.footer-links-div {
+  display: flex;
+  justify-content: flex-start;
+  gap: 2rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+  text-align: left;
+  color: #fff;
+}
+
+.footer-link:hover {
+  color: darkgray;
+}
+
+.footer-logo {
+  width: 180px;
+  height: 100px;
+}
+
+.footer-lower {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.footer-copyright {
+
+}
+
+.footer-lower-links {
+
+}
+
+.social-icons {
+  display: flex;
+  flex-direction: row;
+  gap: 0.5rem;
+}
+
+.linkedIn:hover {
+  fill: darkgray;
+}
+
+.gitHub:hover {
+  fill: darkgray;
+}
+
+hr {
+  color: white !important;
+  width: 100%;
+}
+
+
