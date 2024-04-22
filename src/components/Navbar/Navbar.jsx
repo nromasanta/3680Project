@@ -26,7 +26,7 @@ const Navbar = () => {
   };
 
   const darkBackground = () => {
-    const darkBackgroundPathnames = ['/create', '/toprated', '/challenging', '/allquizzes'];
+    const darkBackgroundPathnames = ['/create', '/toprated', '/challenging', '/allquizzes', '/about'];
     return displayNavbar() && (darkBackgroundPathnames.includes(location.pathname) || location.pathname === '');
   };
 

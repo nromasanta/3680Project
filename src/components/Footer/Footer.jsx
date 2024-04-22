@@ -34,9 +34,9 @@ const Footer = () => {
                 Source Code
               </p>
             </Navlink>
-            <Navlink href='/'>
+            <Navlink href='/about'>
               <p className='footer-link'>
-                Contact Us
+                About
               </p>
             </Navlink>
           </div>

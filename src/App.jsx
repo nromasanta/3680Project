@@ -11,6 +11,7 @@ import Landing from './pages/Landing.jsx'
 import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import TopRated from './pages/TopRated.jsx'
+import About from './pages/About.jsx'
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
             <Route path="/challenging" element={<Challenging />}/>
             <Route path="/allquizzes" element={<AllQuizzes />}/>
             <Route path="/toprated" element={<TopRated />}/>
+            <Route path="/about" element={<About />}/>
           </Routes>
         </div>
         <Footer/>
