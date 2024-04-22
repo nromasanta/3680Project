@@ -2,7 +2,9 @@ import React from 'react'
 
 const Create = () => {
   return (
-    <div>Create</div>
+    <div className='temp-page container'>
+      Create
+    </div>
   )
 }
 

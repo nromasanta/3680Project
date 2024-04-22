@@ -2,7 +2,9 @@ import React from 'react'
 
 const AllQuizzes = () => {
   return (
-    <div>AllQuizzes</div>
+    <div className='temp-page container'>
+      AllQuizzes
+    </div>
   )
 }
 

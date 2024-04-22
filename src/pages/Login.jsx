@@ -1,7 +1,7 @@
-import { React, useState, useEffect } from "react";
-import "../styles/Signup.css";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { React, useState, useEffect } from 'react';
+import '../styles/Signup.css';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Login = () => {
   const [loginRequest, setLoginRequest] = useState(false);
@@ -57,50 +57,50 @@ const Login = () => {
   }, [user]);
 
   return (
-    <div className="container signup-page">
-      <div className="login-container">
-        <form className="signup-form">
-          <div className="login-title">
-            <div className="login-return">
+    <div className='container signup-page'>
+      <div className='login-container'>
+        <form className='signup-form'>
+          <div className='login-title'>
+            <div className='login-return'>
               <Link to="/">&#60; &#160;Go Back</Link>
             </div>
             <h1>Welcome Back!</h1>
-            <p className="signup-title-text">We're happy to have you here!</p>
+            <p className='signup-title-text'>We're happy to have you here!</p>
           </div>
-          <div className="login-content">
-            <label className="signup-label">
+          <div className='login-content'>
+            <label className='signup-label'>
               <p>
                 Username <span>*</span>
               </p>
               <input
-                type="username"
-                id="username"
-                className="signup-input"
+                type='username'
+                id='username'
+                className='signup-input'
                 required
               />
             </label>
 
-            <label className="signup-label">
+            <label className='signup-label'>
               <p>
                 Password <span>*</span>
               </p>
               <input
-                type="password"
-                id="password"
-                className="signup-input"
+                type='password'
+                id='password'
+                className='signup-input'
                 required
               />
             </label>
-            <div className="signup-button-can">
+            <div className='signup-button-can'>
               <button
-                className="signup-button"
+                className='signup-button'
                 onClick={(e) => saveUserData(e)}
               >
                 Log In
               </button>
-              <a href="/signup">
-                <p className="signup-button-link">Don't have an Account?</p>
-              </a>
+              <Link to='/signup'>
+                <p className='signup-button-link'>Don't have an Account?</p>
+              </Link>
             </div>
           </div>
         </form>

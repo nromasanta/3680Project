@@ -2,7 +2,9 @@ import React from 'react'
 
 const TopRated = () => {
   return (
-    <div>TopRated</div>
+    <div className='temp-page container'>
+      Top Rated
+    </div>
   )
 }
 

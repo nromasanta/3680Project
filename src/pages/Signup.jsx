@@ -1,5 +1,5 @@
-import { React, useState, useEffect } from "react";
-import axios from "axios";
+import { React, useState, useEffect } from 'react';
+import axios from 'axios';
 import '../styles/Signup.css'
 import { Link } from 'react-router-dom';
 
@@ -73,8 +73,8 @@ const Signup = () => {
             <label className='signup-label'>
               <p>Email <span>*</span></p>
               <input
-              type="email"
-              id="email"
+              type='email'
+              id='email'
               className='signup-input'
               required
               />
@@ -83,8 +83,8 @@ const Signup = () => {
             <label className='signup-label'>
               <p>Username <span>*</span></p>
               <input
-              type="username"
-              id="username"
+              type='username'
+              id='username'
               className='signup-input'
               required
               />
@@ -93,14 +93,14 @@ const Signup = () => {
             <label className='signup-label'>
               <p>Password <span>*</span></p>
               <input
-              type="password"
-              id="password"
+              type='password'
+              id='password'
               className='signup-input'
               required
               />
             </label>
           <div className='signup-button-can'>
-            <button className="signup-button" onClick={(e) => saveUserData(e)}>
+            <button className='signup-button' onClick={(e) => saveUserData(e)}>
               Create an Account
             </button>
             <p className='signup-button-text'>By registering, you agree to QuizCraft's
@@ -108,9 +108,9 @@ const Signup = () => {
                 <span className='signup-button-link'>{' '}Terms of Service.</span>
               </a>
             </p>
-            <a href='/login'>
+            <Link to='/login'>
               <p className='signup-button-link'>Already have an account?</p>
-            </a>
+            </Link>
           </div>
         </div>
       </form>

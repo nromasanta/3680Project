@@ -22,3 +22,12 @@ a {
     padding-left: 10%;
     padding-right: 10%;
 }
+
+.temp-page {
+    margin: 80px auto;
+    width: 90%;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

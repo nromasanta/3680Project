@@ -25,3 +25,23 @@
     margin: 10px auto 20px;
     line-height: 1.4;
 }
+
+.hero-btn {
+    background: #fff;
+    color: #212121;
+    padding: 14px 25px;
+    font-size: 16px;
+    border-radius: 30px;
+    cursor: pointer;
+    border: 0;
+    outline: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero-btn:hover {
+    background-color: #3a3b3c;
+    color: #fff;
+    transition: 0.2s ease;
+}

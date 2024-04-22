@@ -1,14 +1,14 @@
 import React, { Component } from 'react';
 import { useState, useCallback, useEffect } from 'react';
 import Hero from '../components/Hero/Hero.jsx'
-import About from '../components/About/About.jsx'
+import Featured from '../components/Featured/Featured.jsx'
 
 function Landing() {
     return (
         <div className='landing-page'>
             <Hero />
             <div className='container'>
-                <About/>
+                <Featured/>
             </div>
         </div>
     );

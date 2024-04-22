@@ -2,7 +2,9 @@ import React from 'react'
 
 const Challenging = () => {
   return (
-    <div>Challenging</div>
+    <div className='temp-page container'>
+      Challenging
+    </div>
   )
 }
 
