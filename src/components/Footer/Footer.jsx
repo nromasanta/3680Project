@@ -3,7 +3,7 @@ import './Footer.css';
 import { useLocation, Link } from 'react-router-dom';
 import { IconContext } from 'react-icons';
 import { FaGithub, FaLinkedin } from 'react-icons/fa';
-import placeholder from '../../imgs/placeholder.png';
+import logo from '../../imgs/logo.png';
 import Navlink from '../Navbar/Navlink.jsx'
 
 const Footer = () => {
@@ -41,7 +41,7 @@ const Footer = () => {
             </Navlink>
           </div>
           <div>
-            <img src={placeholder} className='footer-logo'/>
+            <img src={logo} className='footer-logo'/>
           </div>
         </div>
 
