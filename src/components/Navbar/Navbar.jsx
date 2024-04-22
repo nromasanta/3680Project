@@ -1,24 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import './Navbar.css';
-import placeholder from '../../imgs/placeholder.png';
+import logo from '../../imgs/logo.png';
 import { Link, useLocation } from 'react-router-dom';
 import Navlink from './Navlink.jsx'
 
 const Navbar = () => {
   const location = useLocation();
-  const [sticky, setSticky] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      window.scrollY > 600 ? setSticky(true) : setSticky(false);
-    };
-
-    window.addEventListener('scroll', handleScroll);
-
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
 
   const displayNavbar = () => {
     const excludePathnames = ['/login', '/signup'];
@@ -26,14 +13,14 @@ const Navbar = () => {
   };
 
   const darkBackground = () => {
-    const darkBackgroundPathnames = ['/create', '/toprated', '/challenging', '/allquizzes', '/about'];
+    const darkBackgroundPathnames = ['/create', '/toprated', '/challenging', '/allquizzes'];
     return displayNavbar() && (darkBackgroundPathnames.includes(location.pathname) || location.pathname === '');
   };
 
   return displayNavbar() ? (
-    <nav className={`container ${sticky || darkBackground() ? 'dark-nav' : ''}`}>
+    <nav className={`container ${darkBackground() ? 'dark-nav' : ''}`}>
       <a href='/'>
-        <img src={placeholder} alt="placeholder" className="logo"/>
+        <img src={logo} alt='logo' className='logo'/>
       </a>
       <ul>
         <li>
