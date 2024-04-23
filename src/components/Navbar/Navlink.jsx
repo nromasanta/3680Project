@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 import "./Navlink.css";
 
 const Navlink = ({ children, href }) => {
@@ -11,7 +12,7 @@ const Navlink = ({ children, href }) => {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      <a href={href} className="Navlink-link">
+      <Link to={href} className="Navlink-link">
         {children}
         <motion.span
           className="Navlink-underline"
@@ -19,7 +20,7 @@ const Navlink = ({ children, href }) => {
             scaleX: hovered ? 1 : 0,
           }}
         />
-      </a>
+      </Link>
     </div>
   );
 };

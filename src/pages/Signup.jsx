@@ -104,9 +104,9 @@ const Signup = () => {
               Create an Account
             </button>
             <p className='signup-button-text'>By registering, you agree to QuizCraft's
-              <a href=''>
+              <Link to=''>
                 <span className='signup-button-link'>{' '}Terms of Service.</span>
-              </a>
+              </Link>
             </p>
             <Link to='/login'>
               <p className='signup-button-link'>Already have an account?</p>

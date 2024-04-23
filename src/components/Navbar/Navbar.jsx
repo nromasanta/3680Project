@@ -19,9 +19,9 @@ const Navbar = () => {
 
   return displayNavbar() ? (
     <nav className={`container ${darkBackground() ? 'dark-nav' : ''}`}>
-      <a href='/'>
+      <Link to='/'>
         <img src={logo} alt='logo' className='logo'/>
-      </a>
+      </Link>
       <ul>
         <li>
           <Navlink className='' href='/create'>
