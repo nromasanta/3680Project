@@ -58,7 +58,7 @@ const loginUser = async (req, res) => {
       console.log("passwords match!");
       let data = {signInTime: Date.now(), id};
       const token = jwt.sign(data, jwtSecretKey);
-      return res.status(200).json({auth: true, token: token}).send();
+      return res.status(200).json({auth: true, token: token, userId:myUser._id}).send();
     } else if (err) {
       console.log("Unknown error logging in ->", err);
       return res.status(400).send();
