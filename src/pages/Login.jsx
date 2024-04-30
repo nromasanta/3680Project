@@ -1,17 +1,21 @@
-import { React, useState, useEffect } from 'react';
+import { React, useState, useEffect, localStorage} from 'react';
 import '../styles/Signup.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+// import AuthContext from '../auth/AuthContext';
+import { useContext } from 'react';
 
 const Login = () => {
   const [loginRequest, setLoginRequest] = useState(false);
   const [user, setUser] = useState({ username: null, password: null });
-
+  // const { setToken } = useContext(AuthContext);
+ 
   // call if loginRequest changed && it is true
   useEffect(() => {
     if (loginRequest) {
       console.log("user is ->", user);
       const callLogin = async () => {
+        console.log("In here...");
         try {
           const response = await axios.post(
             "http://localhost:4000/api/users/login",
@@ -19,12 +23,23 @@ const Login = () => {
           );
           if (response.status === 201) {
             console.log("Incorrect login information");
+            
+            localStorage.removeItem("token");
             setLoginRequest(false);
           } else if (response.status === 200) {
-            console.log("Successful login");
+            console.log("Successful login _>", response);
+            console.log(" message --->", response.data.message);
+            let token = response.data.token;
+            console.log("token", token);
+            console.log("typeof token:", typeof(token));
+            console.log("token --->", response.data.token);
+           
+            window.localStorage.setItem("jwt-token", token);
             setLoginRequest(false);
           }
         } catch (err) {
+          setToken(null);
+          localStorage.removeItem("token");
           console.log("Unknown error -> ", err);
           setLoginRequest(false);
         }
@@ -43,7 +58,7 @@ const Login = () => {
         username: newUsername,
         password: newPassword,
       });
-      setLoginRequest(true);
+      setLoginRequest(newUsername);
     } else {
       console.log("Please enter a username or password!");
     }

@@ -71,6 +71,10 @@
   text-decoration: underline;
 }
 
+.signup-title-header {
+
+}
+
 .signup-title-text {
   margin-top: 10px;
   color: rgba(0,0,0,0.75)
@@ -157,4 +161,17 @@ button.signup-button:hover {
 button.signup-button:disabled {
   background-color: #ccc;
   cursor: not-allowed;
+}
+
+@media screen and (max-width: 800px) {
+  .signup-title-header {
+    display: flex;
+    text-align: center;
+    justify-content: center;
+  }
+
+  .signup-title {
+    margin-bottom: 0.5rem;
+  }
+  
 }
