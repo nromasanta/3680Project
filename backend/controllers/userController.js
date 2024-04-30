@@ -1,6 +1,8 @@
 import User from "../models/userModel.js";
 import mongoose from "mongoose";
 import bcrypt from "bcrypt";
+import jwt from 'jsonwebtoken';
+import dotenv from 'dotenv';
 
 // how to query documents :
 // https://mongoosejs.com/docs/queries.html
@@ -34,6 +36,7 @@ const createUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
+  const jwtSecretKey = process.env.JWT_SECRET;
   console.log("req.body ->", req.body);
   const { username, password } = req.body;
 
@@ -51,14 +54,15 @@ const loginUser = async (req, res) => {
       return res.status(201).send();
     } else if (result) {
       console.log("passwords match!");
-      return res.status(200).send();
+      let data = {signInTime: Date.now(), username};
+      const token = jwt.sign(data, jwtSecretKey);
+      return res.status(200).json({message: 'Logged In!', token: token}).send();
     } else if (err) {
       console.log("Unknown error logging in ->", err);
       return res.status(400).send();
     }
   });
 
-  return res.status(200).send();
 };
 
 // get all users - returns array of JSON objects
