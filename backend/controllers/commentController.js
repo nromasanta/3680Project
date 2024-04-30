@@ -63,7 +63,7 @@ const findUserComments = async (req, res) => {
 };
 
 // get a single user
-const getRandomComment = async (req, res) => {
+const findRandomComment = async (req, res) => {
 
     console.log("req.body -> ", req.body);
     const { quizID } = req.body;
@@ -82,4 +82,4 @@ const getRandomComment = async (req, res) => {
     console.log("got from db -> ", userComments);
     return res.status(200).json(randomComment);
 };
-export { createComment, findQuizComments, findUserComments, getRandomComment };
+export { createComment, findQuizComments, findUserComments, findRandomComment };
