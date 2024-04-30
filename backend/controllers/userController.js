@@ -47,6 +47,8 @@ const loginUser = async (req, res) => {
   }
   console.log("received -> ", req.body);
   console.log("got from db ->", myUser);
+  const id = myUser._id.toString();
+  console.log("ID -> ", id);
 
   bcrypt.compare(password, myUser.password, function (err, result) {
     if (!result) {
@@ -54,9 +56,9 @@ const loginUser = async (req, res) => {
       return res.status(201).send();
     } else if (result) {
       console.log("passwords match!");
-      let data = {signInTime: Date.now(), username};
+      let data = {signInTime: Date.now(), id};
       const token = jwt.sign(data, jwtSecretKey);
-      return res.status(200).json({message: 'Logged In!', token: token}).send();
+      return res.status(200).json({auth: true, token: token}).send();
     } else if (err) {
       console.log("Unknown error logging in ->", err);
       return res.status(400).send();

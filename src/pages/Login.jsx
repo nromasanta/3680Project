@@ -3,12 +3,12 @@ import '../styles/Signup.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 // import AuthContext from '../auth/AuthContext';
-import { useContext } from 'react';
+import { useAuth } from '../auth/authProvider';
 
 const Login = () => {
   const [loginRequest, setLoginRequest] = useState(false);
   const [user, setUser] = useState({ username: null, password: null });
-  // const { setToken } = useContext(AuthContext);
+  const { setToken } = useAuth();
  
   // call if loginRequest changed && it is true
   useEffect(() => {
@@ -28,13 +28,12 @@ const Login = () => {
             setLoginRequest(false);
           } else if (response.status === 200) {
             console.log("Successful login _>", response);
-            console.log(" message --->", response.data.message);
             let token = response.data.token;
             console.log("token", token);
             console.log("typeof token:", typeof(token));
             console.log("token --->", response.data.token);
-           
-            window.localStorage.setItem("jwt-token", token);
+            setToken(response.data.token);
+            // window.localStorage.setItem("jwt-token", token);
             setLoginRequest(false);
           }
         } catch (err) {
