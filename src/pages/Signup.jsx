@@ -65,7 +65,7 @@ const Signup = () => {
               &#60; &#160;Go Back
             </Link>
           </div>
-          <h1>Create an Account</h1>
+          <h1 className='signup-title-header'>Create an Account</h1>
           <p className='signup-title-text'>Thanks for joining us!</p>
         </div>
         <div className='signup-content'>

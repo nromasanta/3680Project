@@ -18,7 +18,8 @@ const Navbar = () => {
   };
 
   return displayNavbar() ? (
-    <nav className={`container ${darkBackground() ? 'dark-nav' : ''}`}>
+    <div className='navbar'>
+      <nav className={`container ${darkBackground() ? 'dark-nav' : ''}`}>
       <Link to='/'>
         <img src={logo} alt='logo' className='logo'/>
       </Link>
@@ -50,6 +51,7 @@ const Navbar = () => {
         </li>
       </ul>
     </nav>
+    </div>
   ) : null;
 };
 

@@ -7,12 +7,18 @@
   color: #fff;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-around;
   flex-direction: row;
 }
 
+.about-hero-image {
+  width: 380px;
+  height: 280px;
+}
+
+
 .about-hero-text {
-  text-align: center;
+  text-align: start;
   max-width: 800px;
 }
 
@@ -25,6 +31,7 @@
   max-width: 700px;
   margin: 10px auto 20px;
   line-height: 1.4;
+  font-size: 20px;
 }
 
 .about-body {
@@ -34,15 +41,14 @@
 }
 
 .about-image {
-  width: 280px;
-  height: 200px;
+  width: 380px;
+  height: 280px;
 }
 
 .about-section-1 {
-  height: 30vh;
   width: 100%;
-  padding-top: 15%;
-  padding-bottom: 15%;
+  padding-top: 5%;
+  padding-bottom: 5%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -50,6 +56,7 @@
 }
 
 .about-1-content {
+  width: fit-content;
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -83,10 +90,9 @@
 }
 
 .about-section-2 {
-  height: 30vh;
   width: 100%;
-  padding-top: 15%;
-  padding-bottom: 15%;
+  padding-top: 5%;
+  padding-bottom: 5%;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -94,6 +100,7 @@
 }
 
 .about-2-content {
+  width: fit-content;
   display: flex;
   flex-direction: row;
   justify-content: center;
