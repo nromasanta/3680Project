@@ -19,6 +19,8 @@
     "hamburger-react": "^2.5.0",
     "jsonwebtoken": "^9.0.2",
     "localforage": "^1.10.0",
+    "lucide-preact": "^0.376.0",
+    "lucide-react": "^0.376.0",
     "match-sorter": "^6.3.4",
     "mongoose": "^8.3.2",
     "morgan": "^1.10.0",

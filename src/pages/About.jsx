@@ -27,7 +27,7 @@ const About = () => {
       {/*Body*/}
       <div className='about-body'>
 
-      <div className='about-section-2 container'>
+      <div className='about-section-2 set-container'>
           <div className='about-2-content'>
             <div className='about-2-left'>
               <img src={story} alt='placeholder' className='about-image'/>
@@ -43,7 +43,7 @@ const About = () => {
           </div>
         </div>
 
-        <div className='about-section-1 container'>
+        <div className='about-section-1 set-container'>
           <div className='about-1-content'>
             <div className='about-1-left'>
               <h3>Our Purpose</h3>
