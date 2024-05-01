@@ -3,7 +3,6 @@ import './Navbar.css';
 import logo from '../../imgs/logo.png';
 import { Link, useLocation } from 'react-router-dom';
 import Navlink from './Navlink.jsx'
-import Navlink from './Navlink.jsx'
 import Desknav from './Desknav.jsx';
 import Sidenav from './Sidenav.jsx';
 
