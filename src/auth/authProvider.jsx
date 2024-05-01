@@ -4,9 +4,9 @@ import { createContext, useContext, useEffect, useMemo, useState } from "react";
 const AuthContext = createContext();
 
 const AuthProvider = ({ children }) => {
-
   const [token, setToken_] = useState(localStorage.getItem("token"));
   const [userId, setUserId_] = useState(localStorage.getItem("userId"));
+
 
   const setToken = (newToken) => {
     setToken_(newToken);
@@ -14,6 +14,15 @@ const AuthProvider = ({ children }) => {
 
   const setUserId = (newUser) => {
     setUserId_(newUser);
+  };
+
+  const logout = () => {
+    setToken_(null);
+    setUserId_(null);
+    delete axios.defaults.headers.common["Authorization"];
+    localStorage.removeItem('token');
+    localStorage.removeItem('userId');
+    
   };
 
   useEffect(() => {
@@ -35,6 +44,7 @@ const AuthProvider = ({ children }) => {
       setToken,
       userId,
       setUserId,
+      logout
     }),
     [token, userId]
   );

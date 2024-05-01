@@ -1,12 +1,16 @@
 import React from 'react';
 import './Navbar.css';
 import logo from '../../imgs/logo.png';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Navlink from './Navlink.jsx'
+import { useAuth } from '../../auth/authProvider'
+import { Navigate } from 'react-router-dom';
+
 
 const Navbar = () => {
+  const { token, logout } = useAuth(); 
   const location = useLocation();
-
+  const navigate = useNavigate();
   const displayNavbar = () => {
     const excludePathnames = ['/login', '/signup'];
     return !excludePathnames.includes(location.pathname);
@@ -15,6 +19,12 @@ const Navbar = () => {
   const darkBackground = () => {
     const darkBackgroundPathnames = ['/create', '/toprated', '/challenging', '/allquizzes'];
     return displayNavbar() && (darkBackgroundPathnames.includes(location.pathname) || location.pathname === '');
+  };
+
+  const handleLogout = () => {
+    logout();
+    navigate('/login');
+
   };
 
   return displayNavbar() ? (
@@ -44,11 +54,18 @@ const Navbar = () => {
             All Quizzes
           </Navlink>
         </li>
+        { token ? (
         <li>
+            <button className='login-btn' onClick={handleLogout}>Logout</button>
+        </li>
+        ) : ( 
+          <li>
           <Link to='/login'>
             <button className='login-btn'>Login/Register</button>
           </Link>
         </li>
+        )}
+
       </ul>
     </nav>
     </div>
