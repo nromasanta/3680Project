@@ -52,7 +52,7 @@ const Create = () => {
   };
 
   return (
-    <div className="temp-page container">
+    <div className="temp-page set-container">
       <form onSubmit={handleSubmit}>
         {questionArray.map((item, index) => (
           <div key = {index}>

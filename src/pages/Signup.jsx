@@ -56,7 +56,7 @@ const Signup = () => {
     }, [user]);
 
   return (
-    <div className='container signup-page'>
+    <div className='set-container signup-page'>
     <div className='signup-container'>
       <form className='signup-form'>
         <div className='signup-title'>

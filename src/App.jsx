@@ -21,7 +21,7 @@ const App = () => {
       <div className="app">
         <BrowserRouter>
           <Navbar />
-          <div className="pages">
+          <div className="set-pages">
             <Routes>
               <Route path="/" element={<Landing />} />
               <Route path="/login" element={<Login />} />

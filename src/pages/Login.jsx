@@ -69,7 +69,7 @@ const Login = () => {
   }, [currentUser]);
 
   return (
-    <div className='container signup-page'>
+    <div className='set-container signup-page'>
       <div className='login-container'>
         <form className='signup-form'>
           <div className='login-title'>

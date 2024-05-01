@@ -9,7 +9,7 @@ const About = () => {
     <div className='about-page'>
 
       {/*Hero*/}
-      <div className='about-hero container'>
+      <div className='about-hero set-container'>
         <div className='about-hero-left'>
           <div className='about-hero-text'>
               <h1>Next Level Fanaticism</h1>

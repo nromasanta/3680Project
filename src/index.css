@@ -21,7 +21,7 @@ a {
     cursor: pointer;
 }
 
-.container {
+.set-container {
     padding-left: 10%;
     padding-right: 10%;
 }
@@ -35,12 +35,13 @@ a {
     justify-content: center;
 }
 
+
 .mobile-nav {
     display: none;
 }
 
 @media screen and (max-width: 1050px) {
-    .container {
+    .set-container {
         padding-left: 5%;
         padding-right: 5%;
     }
