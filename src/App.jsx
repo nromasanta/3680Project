@@ -1,5 +1,6 @@
 import React from 'react'
 import Navbar from './components/Navbar/Navbar.jsx'
+import Sidenav from './components/Navbar/Sidenav.jsx'
 import Footer from './components/Footer/Footer.jsx'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { ProtectedRoute } from './components/routes/ProtectedRoute.jsx'
