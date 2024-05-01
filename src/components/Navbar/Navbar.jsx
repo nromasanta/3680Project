@@ -3,6 +3,8 @@ import './Navbar.css';
 import logo from '../../imgs/logo.png';
 import { Link, useLocation } from 'react-router-dom';
 import Navlink from './Navlink.jsx'
+import Desknav from './Desknav.jsx';
+import Sidenav from './Sidenav.jsx';
 
 const Navbar = () => {
   const location = useLocation();
@@ -18,40 +20,17 @@ const Navbar = () => {
   };
 
   return displayNavbar() ? (
-    <div className='navbar'>
-      <nav className={`container ${darkBackground() ? 'dark-nav' : ''}`}>
-      <Link to='/'>
+    <nav className={`container ${darkBackground() ? 'dark-nav' : ''}`}>
+      <a href='/'>
         <img src={logo} alt='logo' className='logo'/>
-      </Link>
-      <ul>
-        <li>
-          <Navlink className='' href='/create'>
-            Create
-          </Navlink>
-        </li>
-        <li>
-          <Navlink className='' href='/toprated'>
-            Top Rated
-          </Navlink>
-        </li>
-        <li>
-          <Navlink className='' href='/challenging'>
-            Challenging
-          </Navlink>
-        </li>
-        <li>
-          <Navlink className='' href='/allquizzes'>
-            All Quizzes
-          </Navlink>
-        </li>
-        <li>
-          <Link to='/login'>
-            <button className='login-btn'>Login/Register</button>
-          </Link>
-        </li>
-      </ul>
+      </a>
+      <div className='desktop-nav'>
+        <Desknav />
+      </div>
+      <div className='mobile-nav'>
+        <Sidenav />
+      </div>
     </nav>
-    </div>
   ) : null;
 };
 

@@ -3,43 +3,40 @@ import '../styles/Signup.css';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 // import AuthContext from '../auth/AuthContext';
-import { useContext } from 'react';
+import { useAuth } from '../auth/authProvider';
 
 const Login = () => {
   const [loginRequest, setLoginRequest] = useState(false);
-  const [user, setUser] = useState({ username: null, password: null });
-  // const { setToken } = useContext(AuthContext);
+  const [currentUser, setCurrentUser] = useState({ username: null, password: null });
+  const { setToken, setUserId } = useAuth();
  
   // call if loginRequest changed && it is true
   useEffect(() => {
     if (loginRequest) {
-      console.log("user is ->", user);
+      console.log("user is ->", currentUser);
       const callLogin = async () => {
         console.log("In here...");
         try {
           const response = await axios.post(
             "http://localhost:4000/api/users/login",
-            user
+            currentUser
           );
           if (response.status === 201) {
             console.log("Incorrect login information");
-            
+            localStorage.removeItem("userId");
             localStorage.removeItem("token");
             setLoginRequest(false);
           } else if (response.status === 200) {
             console.log("Successful login _>", response);
-            console.log(" message --->", response.data.message);
-            let token = response.data.token;
-            console.log("token", token);
-            console.log("typeof token:", typeof(token));
-            console.log("token --->", response.data.token);
-           
-            window.localStorage.setItem("jwt-token", token);
+            console.log(response.data.userId);
+            setToken(response.data.token);
+            setUserId(response.data.userId);
             setLoginRequest(false);
           }
         } catch (err) {
           setToken(null);
           localStorage.removeItem("token");
+          localStorage.removeItem("userId");
           console.log("Unknown error -> ", err);
           setLoginRequest(false);
         }
@@ -54,7 +51,7 @@ const Login = () => {
     const newUsername = document.getElementById("username").value;
     const newPassword = document.getElementById("password").value;
     if (newUsername != null && newPassword != null) {
-      setUser({
+      setCurrentUser({
         username: newUsername,
         password: newPassword,
       });
@@ -66,10 +63,10 @@ const Login = () => {
 
   // for debugging, remove in final version
   useEffect(() => {
-    if (user.username != null && user.password != null) {
-      console.log(user);
+    if (currentUser.username != null && currentUser.password != null) {
+      console.log(currentUser);
     }
-  }, [user]);
+  }, [currentUser]);
 
   return (
     <div className='container signup-page'>

@@ -55,3 +55,25 @@ nav ul li:hover {
     color: #fff;
     transition: 0.2s ease;
 }
+
+.sidenav {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+@media screen and (max-width: 1050px) {
+    .desktop-nav {
+        display: none;
+    }
+    .mobile-nav {
+        display: contents;
+    }
+
+
+    nav {
+    }
+
+    nav ul {
+    }
+}
