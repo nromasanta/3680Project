@@ -4,6 +4,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 // import AuthContext from '../auth/AuthContext';
 import { useAuth } from '../auth/authProvider';
+import userIcon from '../imgs/user.png'
+import password from '../imgs/password.png'
 
 const Login = () => {
   const [loginRequest, setLoginRequest] = useState(false);
@@ -76,33 +78,36 @@ const Login = () => {
             <div className='login-return'>
               <Link to="/">&#60; &#160;Go Back</Link>
             </div>
-            <h1>Welcome Back!</h1>
+            <p className='signup-title-header'>Welcome Back!</p>
             <p className='signup-title-text'>We're happy to have you here!</p>
           </div>
           <div className='login-content'>
-            <label className='signup-label'>
-              <p>
-                Username <span>*</span>
-              </p>
-              <input
-                type='username'
-                id='username'
-                className='signup-input'
-                required
-              />
-            </label>
+            <div className='signup-label-container'>
+              <label className='signup-label'>
+                <img src={userIcon}/>
+                <input
+                  type='username'
+                  id='username'
+                  className='signup-input'
+                  placeholder='Username'
+                  required
+                />
+              </label>
+            </div>
 
-            <label className='signup-label'>
-              <p>
-                Password <span>*</span>
-              </p>
-              <input
-                type='password'
-                id='password'
-                className='signup-input'
-                required
-              />
-            </label>
+            <div className='signup-label-container'>
+              <label className='signup-label'>
+                <img src={password}/>
+                <input
+                  type='password'
+                  id='password'
+                  className='signup-input'
+                  placeholder='Password'
+                  required
+                />
+              </label>
+            </div>
+
             <div className='signup-button-can'>
               <button
                 className='signup-button'
