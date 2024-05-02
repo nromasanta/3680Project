@@ -26,6 +26,10 @@ a {
     padding-right: 10%;
 }
 
+.content {
+    padding-top: 108px;
+}
+
 .temp-page {
     margin: 80px auto;
     width: 90%;
