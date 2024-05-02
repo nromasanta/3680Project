@@ -20,7 +20,7 @@ const Navbar = () => {
   };
 
   return displayNavbar() ? (
-    <nav className={`container ${darkBackground() ? 'dark-nav' : ''}`}>
+    <nav className={`navbar set-container ${darkBackground() ? 'dark-nav' : ''}`}>
       <a href='/'>
         <img src={logo} alt='logo' className='logo'/>
       </a>

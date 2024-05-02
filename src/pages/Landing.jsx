@@ -7,7 +7,7 @@ function Landing() {
     return (
         <div className='landing-page'>
             <Hero />
-            <div className='container'>
+            <div className='set-container'>
                 <Featured/>
             </div>
         </div>

@@ -1,0 +1,151 @@
+.create-page {
+  width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.create-a-quiz {
+  display: flex;
+  background-color: white;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 2rem 4rem 2rem 4rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.create-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  color: #000;
+}
+
+.create-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.create-button,
+.create-add-button {
+  color: #000;
+  border: 2px solid black;
+  border-radius: 30px;
+}
+
+.create-label {
+  width: 80%;
+  padding: 10px 25px 10px 25px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #eaeaea;
+  border-radius: 5px;
+}
+
+.create-title {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+}
+
+.create-title-label {
+  display: block;
+  font-size: 1.5em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+}
+
+.create-inputs {
+  background: transparent;
+  border: none;
+  outline: none;
+}
+
+.create-question {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  gap: 2rem;
+  padding-bottom: 2rem;
+  border-bottom: 2px solid #eaeaea;
+}
+
+.create-question-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: 400px;
+  overflow-y: auto;
+  gap: 3rem;
+}
+
+.create-button-container {
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.create-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  width: 80%;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.create-tags {
+  display: flex;
+  width: 80%;
+  justify-content: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.create-page-header {
+  display: block;
+  font-size: 2.25em;
+  margin-top: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  color: #000;
+  text-align: center;
+}
+
+@media screen and (max-width: 1050px) {
+  .create-question {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .create-a-quiz {
+    padding: 2rem 1rem 2rem 1rem;
+    margin: 1rem 0rem 1rem 0rem;
+  }
+
+  .create-content {
+    width: 100%;
+  }
+}

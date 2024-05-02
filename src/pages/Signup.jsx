@@ -2,6 +2,9 @@ import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/Signup.css'
 import { Link } from 'react-router-dom';
+import userIcon from '../imgs/user.png'
+import password from '../imgs/password.png'
+import email from '../imgs/email.png'
 
 const Signup = () => {
   const [loginRequest, setLoginRequest] = useState(false);
@@ -56,7 +59,7 @@ const Signup = () => {
     }, [user]);
 
   return (
-    <div className='container signup-page'>
+    <div className='set-container signup-page'>
     <div className='signup-container'>
       <form className='signup-form'>
         <div className='signup-title'>
@@ -70,35 +73,45 @@ const Signup = () => {
         </div>
         <div className='signup-content'>
 
-            <label className='signup-label'>
-              <p>Email <span>*</span></p>
-              <input
-              type='email'
-              id='email'
-              className='signup-input'
-              required
-              />
-            </label>
+          <div className='signup-label-container'>
+              <label className='signup-label'>
+                <img src={email}/>
+                <input
+                  type='email'
+                  id='email'
+                  className='signup-input'
+                  placeholder='Email'
+                  required
+                />
+              </label>
+            </div>
             
-            <label className='signup-label'>
-              <p>Username <span>*</span></p>
-              <input
-              type='username'
-              id='username'
-              className='signup-input'
-              required
-              />
-            </label>
+            <div className='signup-label-container'>
+              <label className='signup-label'>
+                <img src={userIcon}/>
+                <input
+                  type='username'
+                  id='username'
+                  className='signup-input'
+                  placeholder='Username'
+                  required
+                />
+              </label>
+            </div>
 
-            <label className='signup-label'>
-              <p>Password <span>*</span></p>
-              <input
-              type='password'
-              id='password'
-              className='signup-input'
-              required
-              />
-            </label>
+            <div className='signup-label-container'>
+              <label className='signup-label'>
+                <img src={password}/>
+                <input
+                  type='password'
+                  id='password'
+                  className='signup-input'
+                  placeholder='Password'
+                  required
+                />
+              </label>
+            </div>
+
           <div className='signup-button-can'>
             <button className='signup-button' onClick={(e) => saveUserData(e)}>
               Create an Account

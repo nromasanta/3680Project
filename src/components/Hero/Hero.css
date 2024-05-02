@@ -11,8 +11,13 @@
 }
 
 .hero-text {
+    display: flex;
+    flex-direction: column;
     text-align: center;
     max-width: 800px;
+    height: 100%;
+    padding-top: 3.5rem;
+    padding-bottom: 1rem;
 }
 
 .hero-text h1 {
@@ -44,4 +49,18 @@
     background-color: #3a3b3c;
     color: #fff;
     transition: 0.2s ease;
+}
+
+@media screen and (max-width: 800px) {
+    .hero {
+        min-height: 60vh;
+    }
+
+    .hero-text {
+    }
+
+    .hero-text h1 {
+        font-size: 40px;
+        font-weight: 600;
+    }
 }

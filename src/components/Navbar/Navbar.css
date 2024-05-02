@@ -1,9 +1,5 @@
-.navbar {
-    width: 100%;
-    display: flex;
-}
 
-nav  {
+.navbar  {
     width: 100%;
     color: #fff;
     padding: 4px 0;
@@ -21,14 +17,14 @@ nav  {
     height: 100px;
 }
 
-nav ul li {
+.navbar ul li {
     display: inline-block;
     list-style: none;
     margin: 5px 20px;
     font-size: 16px;
 }
 
-nav ul li:hover {
+.navbar ul li:hover {
     color: darkgray;
 }
 .dark-nav {
@@ -59,6 +55,14 @@ nav ul li:hover {
 .sidenav {
     display: flex;
     flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.login-btn-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
     gap: 1rem;
 }
 
@@ -70,10 +74,21 @@ nav ul li:hover {
         display: contents;
     }
 
-
-    nav {
+    .mobile-navicon {
+        color: white;
     }
 
-    nav ul {
+    .mobile-login-btn {
+        background: #fff;
+        color: #212121;
+        padding: 14px 25px;
+        font-size: 16px;
+        border-radius: 30px;
+        cursor: pointer;
+        border: 2px solid black;
+        outline: 0;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
     }
 }
