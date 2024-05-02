@@ -87,7 +87,7 @@ function Sidebar({ children, onClose }) {
         transition={{ type: 'spring', stiffness: 100, damping: 20 }}
         className='h-full w-64 flex flex-col bg-white border-r shadow-sm rounded-l-lg'
       >
-        <div className='flex px-3 py-6 border-b-2 justify-between items-center'>
+        <div className='flex px-3 py-6 border-b-2 justify-around items-center'>
           <button
             onClick={handleButtonClick}
             className='text-center'
