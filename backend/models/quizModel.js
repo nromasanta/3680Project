@@ -38,13 +38,7 @@ const quizSchema = new Schema({
     quizType: {
         type: String,
         required: true
-    },
-    quizTags: [
-        {
-            type: String,
-            default:null,
-        }
-    ]
+    }
 }, { timestamps: true });
 
 export default mongoose.model('Quiz', quizSchema);

@@ -18,19 +18,19 @@ const Create = () => {
   const [quizLength, setQuizLength] = useState(1);
   const [nQuestion, setNQuestion] = useState(2);
   const tags = [
-    { value: "art", label: "Art" },
-    { value: "geography", label: "Geography" },
-    { value: "history", label: "History" },
-    { value: "language", label: "Language" },
-    { value: "literature", label: "Literature" },
-    { value: "math", label: "Math" },
-    { value: "music", label: "Music" },
-    { value: "personal", label: "Personal" },
-    { value: "popculture", label: "Pop Culture" },
-    { value: "science", label: "Science" },
-    { value: "sports", label: "Sports" },
-    { value: "games", label: "Video Games" },
-    { value: "other", label: "Other" },
+    { value: "Art", label: "Art" },
+    { value: "Geography", label: "Geography" },
+    { value: "History", label: "History" },
+    { value: "Language", label: "Language" },
+    { value: "Literature", label: "Literature" },
+    { value: "Math", label: "Math" },
+    { value: "Music", label: "Music" },
+    { value: "Personal", label: "Personal" },
+    { value: "Pop Culture", label: "Pop Culture" },
+    { value: "Science", label: "Science" },
+    { value: "Sports", label: "Sports" },
+    { value: "Video Games", label: "Video Games" },
+    { value: "Other", label: "Other" },
   ];
 
   // -------------------------------------------------------------------------------

@@ -5,7 +5,7 @@ const router = express.Router();
 
 router.post('/', createQuiz);
 
-router.get('/quiz', findQuiz);
+router.get('/quiz/:id', findQuiz);
 
 router.get('/all', findAllQuizzes);
 

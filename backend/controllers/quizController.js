@@ -37,10 +37,9 @@ const createQuiz = async (req, res) => {
 
 const findQuiz = async (req, res) => {
   try {
-    console.log("Received: ", req.body);
-    const { quizID } = req.body;
-    console.log("Received quizID -> ", quizID);
-    const quiz = await Quiz.findById(quizID);
+    const { id } = req.params;
+    console.log("Received quizID -> ", id);
+    const quiz = await Quiz.findById(id);
 
     console.log("Quiz Received -> ", quiz);
 
@@ -52,7 +51,7 @@ const findQuiz = async (req, res) => {
 
 const findAllQuizzes = async (req, res) => {
   try {
-    const quizzes = await Quiz.find({});
+    const quizzes = await Quiz.find({}).populate("author");
 
     console.log("Quizzes returned -> ", quizzes);
 
