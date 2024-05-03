@@ -4,15 +4,14 @@ import mongoose from "mongoose";
 const createQuiz = async (req, res) => {
   try {
     console.log("Received: ", req.body);
-    const { quizName, questionArray, answerArray, quizType, quizLength } = req.body;
-    console.log("received quiz name -> ", quizName);
-    console.log("received questions -> ", questions);
-    console.log("received quiz type -> ", quizType);
+    const { author, quizName, quizLength, questions, quizType } = req.body;
+    console.log("author -> ", author);
+    console.log("Name -> ", quizName);
+    console.log("Length -> ", quizLength);
+    console.log("Questions -> ", questions);
+    console.log("Type -> ", quizType);
 
-    let jsonArray = [];
-    questionArray.forEach((element, index) =>
-      jsonArray.push({ question: element, answer: answerArray[index] })
-    );
+
     const existingQuizName = await Quiz.find({ quizName: quizName });
     if (existingQuizName.length > 0) {
       console.log("Quiz with this name already exists");
@@ -20,15 +19,14 @@ const createQuiz = async (req, res) => {
     }
 
     const newQuiz = await Quiz.create({
+      author: author,
       quizName: quizName,
       quizType: quizType,
       quizLength: quizLength,
-      questions: jsonArray,
+      questions: questions
     });
-
-
-
     console.log("New Quiz Created -->", newQuiz);
+
     return res.status(200).send();
 
   } catch (err) {

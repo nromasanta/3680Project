@@ -99,15 +99,28 @@ const Create = () => {
     setTag(e.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    const newUserQuestions = userQuestions.forEach(item => delete item.id);
+    let newUserQuestions = userQuestions;
+    newUserQuestions.forEach(item => delete item.id);
+    console.log("newuser ->", newUserQuestions);
     const jsonBody = {
+      author: userId,
       quizName: title,
       quizLength: quizLength,
       questions: newUserQuestions,
       quizType: tag
     };
+    try {
+      console.log("Questions -> ", jsonBody.questions);
+      const res = await axios.post(
+        `http://localhost:4000/api/quizzes/`,
+        jsonBody
+      );
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+    }
     console.log(jsonBody);
     console.log(userQuestions);
   };
