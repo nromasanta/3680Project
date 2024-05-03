@@ -2,7 +2,6 @@ import React from 'react';
 import './Navbar.css';
 import logo from '../../imgs/logo.png';
 import { Link, useLocation } from 'react-router-dom';
-import Navlink from './Navlink.jsx'
 import Desknav from './Desknav.jsx';
 import Sidenav from './Sidenav.jsx';
 
@@ -15,7 +14,7 @@ const Navbar = () => {
   };
 
   const darkBackground = () => {
-    const darkBackgroundPathnames = ['/create', '/toprated', '/challenging', '/allquizzes'];
+    const darkBackgroundPathnames = ['/create', '/allquizzes'];
     return displayNavbar() && (darkBackgroundPathnames.includes(location.pathname) || location.pathname === '');
   };
 
