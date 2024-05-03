@@ -4,11 +4,12 @@ import { useClickAway } from 'react-use';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../auth/authProvider';
 import './Navbar.css';
-import { Menu } from 'lucide-react';
+import { Menu, Settings } from 'lucide-react';
 import { PencilLine, List, Sparkles, Sword } from 'lucide-preact';
 
 const Sidenav = ({ children }) => {
   const [isOpen, setOpen] = useState(false);
+  const { token, logout } = useAuth();
   const ref = useRef(null);
 
   useClickAway(ref, () => setOpen(false));
@@ -36,16 +37,6 @@ const Sidenav = ({ children }) => {
           className='flex justify-center items-center w-full py-6 px-2 border-b-2'
           >
           Create
-          </a>
-          <a href='/toprated' 
-          className='flex justify-center items-center w-full py-6 px-2 border-b-2'
-          >
-          Top Rated
-          </a>
-          <a href='/challenging' 
-          className='flex justify-center items-center w-full py-6 px-2 border-b-2'
-          >
-          Challenging
           </a>
           <a href='/allquizzes' 
           className='flex justify-center items-center w-full py-6 px-2'
@@ -96,7 +87,12 @@ function Sidebar({ children, onClose }) {
           </button>
 
           { token ? (
+            <>
+              <button href="/">
+                <Settings size={36} color='black'/>
+              </button>
               <button className='mobile-login-btn' onClick={handleLogout}>Logout</button>
+            </>
             ) : ( 
               <Link to='/login'>
                 <button className='mobile-login-btn'>Login/Register</button>

@@ -26,24 +26,21 @@ const Desknav = () => {
           </Navlink>
         </li>
         <li>
-          <Navlink className='' href='/toprated'>
-            Top Rated
-          </Navlink>
-        </li>
-        <li>
-          <Navlink className='' href='/challenging'>
-            Challenging
-          </Navlink>
-        </li>
-        <li>
           <Navlink className='' href='/allquizzes'>
             All Quizzes
           </Navlink>
         </li>
         { token ? (
-          <li>
+          <>
+            <li>
+              <Navlink className='' href='/'>
+                Settings
+              </Navlink>
+            </li>
+            <li>
               <button className='login-btn' onClick={handleLogout}>Logout</button>
-          </li>
+            </li>
+          </>
           ) : ( 
             <li>
             <Link to='/login'>
