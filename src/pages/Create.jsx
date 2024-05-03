@@ -3,16 +3,17 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useAuth } from "../auth/authProvider";
 import '../styles/Create.css'
+import { v4 as uuidv4 } from "uuid";
+// source on uuid https://stackoverflow.com/questions/71814357/a-right-way-to-use-uuid-as-key-in-react
 
 const Create = () => {
-  const { token, userId } = useAuth();
-  const [question, setQuestion, title, setTitle] = useState();
-  const [answer, setAnswer] = useState();
-  const [questionArray, setQuestionArray] = useState([{question: "", answer: ""}]);
+  const { userId } = useAuth();
+  const [question, setQuestion] = useState();
+  const [title, setTitle] = useState();
+  const [userQuestions, setUserQuestions] = useState([{id: uuidv4(), question: "", answer: "", option2: "", option3: ""}]);
   const [nQuestion, setNQuestion] = useState(0);
-  let answerArray = [];
-  let jsonArray = [];
 
+  // -------------------------------------------------------------------------------
   useEffect(() => {
     const getUser = async () => {
       console.log("Here");
@@ -31,26 +32,61 @@ const Create = () => {
   const renderNewDiv = () => {
     console.log("Adding...");
     if (nQuestion <= 15) {
-    setQuestionArray([
-      ...questionArray, 
-      { question: "hi", answer: "hi" }
+    setUserQuestions([
+      ...userQuestions,
+      {id: uuidv4(), question: "", answer: "", option2: "", option3: ""}
     ]);
   } else {
     console.log("Unable to add more!");
   }
     setNQuestion(nQuestion+1);
-    console.log("nquestion ->", nQuestion);
-    console.log("questionarray-> ", questionArray);
+  };
+  // -------------------------------------------------------------------------------
+  const handleQuestionChange = (index, question) => {
+    console.log("UserQuestion array: ", userQuestions);
+    const temp = [...userQuestions]; // dupe current question array
+    temp[index].question = question; // go to the index, change the question value
+    setUserQuestions(temp); // set the userquestion array to editted temp one
   };
 
+  const handleAnswerChange = (index, answer) => {
+    console.log("UserQuestion array: ", userQuestions);
+    const temp = [...userQuestions]; // dupe current question array
+    temp[index].answer = answer; // go to the index, change the question value
+    setUserQuestions(temp); // set the userquestion array to editted temp one
+  };
+
+  const handleOption2Change = (index, option) => {
+    console.log("UserQuestion array: ", userQuestions);
+    const temp = [...userQuestions]; // dupe current question array
+    temp[index].option2 = option; // go to the index, change the question value
+    setUserQuestions(temp); // set the userquestion array to editted temp one
+  };
+
+  const handleOption3Change = (index, option) => {
+    const temp = [...userQuestions]; // dupe current question array
+    temp[index].option3 = option; // go to the index, change the question value
+    setUserQuestions(temp); // set the userquestion array to editted temp one
+  };
+
+  const deleteQuestion = (targetIndex) => {
+    console.log("Deleting at index ", targetIndex);
+    console.log("before delete: ", userQuestions);
+    const newArray = userQuestions.filter((item, index) => index !== targetIndex);
+    console.log("After delete: ", newArray);
+    setUserQuestions(newArray);
+  };
 
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    jsonArray.push({question: question, answer: answer});
-    console.log("jsonArray->", jsonArray);
-    console.log("nquestions ->", nQuestion);
+    console.log(userQuestions);
   };
+
+  useEffect( () => {
+    console.log("userq: ", userQuestions);
+  }, [userQuestions]);
+  
 
   return (
     <div className='create-page content set-container'>
@@ -78,15 +114,15 @@ const Create = () => {
           <div className='create-content'>
             <p className='create-title-label'>Step 2: Q&A</p>
             <div className='create-question-container'>
-              {questionArray.map((item, index) => (
-                <div key = {index} className='create-question'>
+              {userQuestions.map((item, index) => (
+                <div key = {item.id} className='create-question'>
                   <div className='create-what-question'>
                     <label className='create-label'>
                       <input
                         type='text'
                         className='create-inputs'
                         placeholder='Enter Question: '
-                        onChange={(e) => setQuestion(e.target.value)}
+                        onChange={(e) => handleQuestionChange(index, e.target.value)}
                         required
                       />
                     </label>
@@ -97,7 +133,7 @@ const Create = () => {
                       type='text' 
                       className='create-inputs' 
                       placeholder='Correct Answer: '
-                      onChange={(e) => setAnswer(e.target.value)} 
+                      onChange={(e) => handleAnswerChange(index, e.target.value)} 
                       required
                       />
                     </label>
@@ -106,7 +142,7 @@ const Create = () => {
                       type='text' 
                       className='create-inputs' 
                       placeholder='Wrong Answer: '
-                      onChange={(e) => setAnswer(e.target.value)} 
+                      onChange={(e) => handleOption2Change(index, e.target.value)} 
                       required
                       />
                     </label>
@@ -115,15 +151,16 @@ const Create = () => {
                       type='text' 
                       className='create-inputs' 
                       placeholder='Wrong Answer: '
-                      onChange={(e) => setAnswer(e.target.value)} 
+                      onChange={(e) => handleOption3Change(index, e.target.value)} 
                       required
                       />
                     </label>
                   </div>
+                  <button type = "button" onClick = {() => deleteQuestion(index)}>Delete</button>
                 </div>
               ))}
             </div>
-            <button onClick={renderNewDiv}>
+            <button type = "button" onClick={renderNewDiv}>
               <p className='login-btn create-add-button'>
                 Add Another Question
               </p>
