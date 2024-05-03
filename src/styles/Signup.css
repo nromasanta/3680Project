@@ -168,6 +168,11 @@ label span {
   margin-top: 16px;
 }
 
+.error {
+  color:red;
+  margin-top: 2px;
+}
+
 button.signup-button {
   background-color: #000;
   width: 100%;

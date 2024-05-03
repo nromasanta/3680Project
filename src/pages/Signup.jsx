@@ -5,15 +5,16 @@ import { Link } from 'react-router-dom';
 import userIcon from '../imgs/user.png'
 import password from '../imgs/password.png'
 import email from '../imgs/email.png'
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
-  const [loginRequest, setLoginRequest] = useState(false);
+  const [signupRequest, setsignupRequest] = useState();
   const [existingUserError, setExistingUserError] = useState(false);
   const [user, setUser] = useState({ email: null, username: null, password: null });
-
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (loginRequest) {
+    if (signupRequest) {
       const callLogin = async () => {
         try {
           const response = await axios.post(
@@ -23,8 +24,12 @@ const Signup = () => {
           console.log("Response status ->", response.status);
           if (response.status === 200) {
             console.log("User successfully created");
+            setExistingUserError(false);
+            navigate('/login');
+
           } else if (response.status === 201) {
             console.log("User already exists");
+            setExistingUserError(true);
           }
         } catch (err) {
           console.log("Unknown error ->", err);
@@ -32,7 +37,7 @@ const Signup = () => {
       };
       callLogin();
     }
-  }, [loginRequest]);
+  }, [signupRequest]);
 
   const saveUserData = (e) => {
     e.preventDefault();
@@ -45,7 +50,7 @@ const Signup = () => {
         username: newUsername,
         password: newPassword,
       });
-      setLoginRequest(true);
+      setsignupRequest(newUsername);
     } else {
       console.log("Please enter a username and password!");
     }
@@ -116,6 +121,10 @@ const Signup = () => {
             <button className='signup-button' onClick={(e) => saveUserData(e)}>
               Create an Account
             </button>
+            { existingUserError ? (
+              <p className='error'>Username already taken</p>
+
+            ) : (<div> </div>)}
             <p className='signup-button-text'>By registering, you agree to QuizCraft's
               <Link to=''>
                 <span className='signup-button-link'>{' '}Terms of Service.</span>

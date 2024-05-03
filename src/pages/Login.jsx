@@ -4,18 +4,19 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 // import AuthContext from '../auth/AuthContext';
 import { useAuth } from '../auth/authProvider';
+import { useNavigate } from 'react-router-dom';
 import userIcon from '../imgs/user.png'
 import password from '../imgs/password.png'
 
 const Login = () => {
   const [loginRequest, setLoginRequest] = useState(false);
   const [currentUser, setCurrentUser] = useState({ username: null, password: null });
+  const [wrongInfoError, setWrongInfoError] = useState(false);
   const { setToken, setUserId } = useAuth();
+  const navigate = useNavigate();
  
   // call if loginRequest changed && it is true
-  useEffect(() => {
-    if (loginRequest) {
-      console.log("user is ->", currentUser);
+
       const callLogin = async () => {
         console.log("In here...");
         try {
@@ -25,27 +26,33 @@ const Login = () => {
           );
           if (response.status === 201) {
             console.log("Incorrect login information");
-            localStorage.removeItem("userId");
-            localStorage.removeItem("token");
+            if (localStorage.getItem("userId") != null) {
+              localStorage.removeItem("userId");
+              localStorage.removeItem("token");
+            }
             setLoginRequest(false);
+            setWrongInfoError(true);
           } else if (response.status === 200) {
             console.log("Successful login _>", response);
             console.log(response.data.userId);
             setToken(response.data.token);
             setUserId(response.data.userId);
             setLoginRequest(false);
+            setWrongInfoError(false);
+            navigate("/");
           }
         } catch (err) {
           setToken(null);
-          localStorage.removeItem("token");
-          localStorage.removeItem("userId");
+          if (localStorage.getItem("userId") != null) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("userId");
+          }
           console.log("Unknown error -> ", err);
           setLoginRequest(false);
         }
       };
-      callLogin();
-    }
-  }, [loginRequest]);
+
+
 
   // sanitize user input
   const saveUserData = (e) => {
@@ -57,7 +64,10 @@ const Login = () => {
         username: newUsername,
         password: newPassword,
       });
-      setLoginRequest(newUsername);
+      setLoginRequest(true);
+      if (currentUser) {
+        callLogin();
+      }
     } else {
       console.log("Please enter a username or password!");
     }
@@ -115,6 +125,10 @@ const Login = () => {
               >
                 Log In
               </button>
+              { wrongInfoError ? (
+              <p className='error'>Username already taken</p>
+
+            ) : (<div> </div>)}
               <Link to='/signup'>
                 <p className='signup-button-link'>Don't have an Account?</p>
               </Link>
