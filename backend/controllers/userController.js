@@ -92,24 +92,23 @@ const getSingleUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
 
-  const { newUsername, newPassword, userId } = req.params;
-  const filter = { _id: userId };
+  const { newUsername, newPassword, userId } = req.body;
   const user = await User.findById(userId);
   if (!mongoose.Types.ObjectId.isValid(userId)) {
     return res.status(404).json({ error: "No such user " });
   }
+  console.log("Found user -->", user);
+  
   if (newUsername != null) {
-    user.username = newUsername;
-    await user.save();
+    user.username = newUsername;;
   }
 
   if (newPassword != null) {
     user.password = newPassword;
-    await user.save();
   }
-  const updatedUser = await User.findById(userId);
+  await user.save()
 
-  return updatedUser;
+  return res.status(200).json({ message: "User updated" });
 }
 
 export { getAllUsers, getSingleUser, createUser, loginUser, updateUser };
