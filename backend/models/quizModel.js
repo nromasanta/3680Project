@@ -10,7 +10,7 @@ const quizSchema = new Schema({
         type: Number,
         required: true
     },
-    qustions: [
+    questions: [
         {
             question: {
                 type: String,
@@ -25,7 +25,13 @@ const quizSchema = new Schema({
     quizType: {
         type: String,
         required: true
-    }
+    },
+    quizTags: [
+        {
+            type: String,
+            default:null,
+        }
+    ]
 }, { timestamps: true });
 
 export default mongoose.model('Quiz', quizSchema);
