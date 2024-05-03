@@ -19,6 +19,7 @@ const Create = () => {
   const [nQuestion, setNQuestion] = useState(2);
   const tags = [
     { value: "Art", label: "Art" },
+    { value: "Entertainment", label: "Entertainment" },
     { value: "Geography", label: "Geography" },
     { value: "History", label: "History" },
     { value: "Language", label: "Language" },
@@ -26,10 +27,8 @@ const Create = () => {
     { value: "Math", label: "Math" },
     { value: "Music", label: "Music" },
     { value: "Personal", label: "Personal" },
-    { value: "Pop Culture", label: "Pop Culture" },
     { value: "Science", label: "Science" },
     { value: "Sports", label: "Sports" },
-    { value: "Video Games", label: "Video Games" },
     { value: "Other", label: "Other" },
   ];
 
