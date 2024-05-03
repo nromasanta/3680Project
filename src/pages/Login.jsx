@@ -18,7 +18,16 @@ const Login = () => {
   // call if loginRequest changed && it is true
 
       const callLogin = async () => {
-        console.log("In here...");
+        const newUsername = document.getElementById("username").value;
+        const newPassword = document.getElementById("password").value;
+        if (!newUsername || !newPassword) {
+          console.log("Username/Password field empty");
+          return;
+        }
+        const currentUser = {
+          username: newUsername,
+          password: newPassword
+        };
         try {
           const response = await axios.post(
             "http://localhost:4000/api/users/login",
@@ -26,9 +35,9 @@ const Login = () => {
           );
           if (response.status === 201) {
             console.log("Incorrect login information");
-            if (localStorage.getItem("userId") != null) {
-              localStorage.removeItem("userId");
-              localStorage.removeItem("token");
+            if (window.localStorage.getItem("userId")) {
+              window.localStorage.removeItem("userId");
+              window.localStorage.removeItem("token");
             }
             setLoginRequest(false);
             setWrongInfoError(true);
@@ -43,9 +52,9 @@ const Login = () => {
           }
         } catch (err) {
           setToken(null);
-          if (localStorage.getItem("userId") != null) {
-            localStorage.removeItem("token");
-            localStorage.removeItem("userId");
+          if (window.localStorage.getItem("userId")) {
+            window.localStorage.removeItem("token");
+            window.localStorage.removeItem("userId");
           }
           console.log("Unknown error -> ", err);
           setLoginRequest(false);
@@ -60,14 +69,8 @@ const Login = () => {
     const newUsername = document.getElementById("username").value;
     const newPassword = document.getElementById("password").value;
     if (newUsername != null && newPassword != null) {
-      setCurrentUser({
-        username: newUsername,
-        password: newPassword,
-      });
       setLoginRequest(true);
-      if (currentUser) {
-        callLogin();
-      }
+      callLogin();
     } else {
       console.log("Please enter a username or password!");
     }
@@ -126,7 +129,7 @@ const Login = () => {
                 Log In
               </button>
               { wrongInfoError ? (
-              <p className='error'>Username already taken</p>
+              <p className='error'>Incorrect username/password</p>
 
             ) : (<div> </div>)}
               <Link to='/signup'>
