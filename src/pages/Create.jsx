@@ -80,24 +80,46 @@ const Create = () => {
             <div className='create-question-container'>
               {questionArray.map((item, index) => (
                 <div key = {index} className='create-question'>
-                  <label className='create-label'>
-                    <input
-                      type='text'
-                      className='create-inputs'
-                      placeholder='Enter Question: '
-                      onChange={(e) => setQuestion(e.target.value)}
+                  <div className='create-what-question'>
+                    <label className='create-label'>
+                      <input
+                        type='text'
+                        className='create-inputs'
+                        placeholder='Enter Question: '
+                        onChange={(e) => setQuestion(e.target.value)}
+                        required
+                      />
+                    </label>
+                  </div>
+                  <div className='create-answers'>
+                    <label className='create-label'>
+                      <input 
+                      type='text' 
+                      className='create-inputs' 
+                      placeholder='Correct Answer: '
+                      onChange={(e) => setAnswer(e.target.value)} 
                       required
-                    />
-                  </label>
-                  <label className='create-label'>
-                    <input 
-                    type='text' 
-                    className='create-inputs' 
-                    placeholder='Enter Answer: '
-                    onChange={(e) => setAnswer(e.target.value)} 
-                    required
-                    />
-                  </label>
+                      />
+                    </label>
+                    <label className='create-label'>
+                      <input 
+                      type='text' 
+                      className='create-inputs' 
+                      placeholder='Wrong Answer: '
+                      onChange={(e) => setAnswer(e.target.value)} 
+                      required
+                      />
+                    </label>
+                    <label className='create-label'>
+                      <input 
+                      type='text' 
+                      className='create-inputs' 
+                      placeholder='Wrong Answer: '
+                      onChange={(e) => setAnswer(e.target.value)} 
+                      required
+                      />
+                    </label>
+                  </div>
                 </div>
               ))}
             </div>
