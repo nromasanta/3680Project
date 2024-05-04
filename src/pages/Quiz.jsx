@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useAuth } from "../auth/authProvider";
-import ListQuizQuestions from "../components/Quiz/ListQuizQuestions";
 import "../styles/Quiz.css";
 
 const Quiz = () => {
@@ -17,24 +16,17 @@ const Quiz = () => {
   const [selectedArray, setSelectedArray] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const generateRandomNumber = (iterations) => {
-    return Array.from({ length: iterations }, () =>
-      Math.floor(Math.random() * 6) + 1
-    );
-  };
-
   useEffect(() => {
     const fetchQuiz = async () => {
       try {
         const res = await axios.get(`http://localhost:4000/api/quizzes/quiz/${quizId}`);
         const { quizLength, questions } = res.data;
-        questions.forEach((item) => (item.number = generateRandomNumber(quizLength)));
         const answers = questions.map((item) => item.answer);
 
         setQuizFullJson(res.data);
         setQuizLength(quizLength);
         setAnswerArray(answers);
-        setQuizQuestions(questions);
+        setQuizQuestions(shuffleQuestions(questions)); // Shuffle questions
         setLoading(false);
       } catch (err) {
         console.error("Error fetching quiz:", err);
@@ -54,29 +46,41 @@ const Quiz = () => {
 
   }, [quizId]);
 
+  const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+  };
+
+  const shuffleQuestions = (questions) => {
+    // Shuffle questions and their options
+    return questions.map((question) => {
+      const options = [question.answer, question.option2, question.option3];
+      const shuffledOptions = shuffleArray(options);
+      return { ...question, shuffledOptions };
+    });
+  };
+
   const handleAnswer = (e, index, num) => {
     const tempArr = [...selectedArray];
     tempArr[index] = e.target.value;
 
+    // Remove selected class from all buttons
     for (let i = 1; i <= 3; i++) {
       const temp = document.getElementById(`item${i}${index}`);
       temp.classList.remove("quiz-selected");
       temp.classList.add("quiz-not-selected");
     }
 
+    // Add selected class to the clicked button
     const el = document.getElementById(`item${num}${index}`);
     el.classList.add("quiz-selected");
+    el.classList.remove("quiz-not-selected");
 
     setSelectedArray(tempArr);
   };
-
-  
-  // uncomment for debugging
-  // useEffect(() => {
-  //   if (selectedArray) {
-  //     console.log("SA -> ", selectedArray);
-  //   }
-  // }, [selectedArray]);
 
   const handleSubmitQuiz = () => {
     navigate(`/quiz/result/${quizId}`, {
@@ -95,15 +99,23 @@ const Quiz = () => {
     return (
       <div className="quiz-page content set-container">
         <div className="quiz-page-container">
-        <p>{quizFullJson.quizName}</p>
+          <p>{quizFullJson.quizName}</p>
           {quizQuestions.map((item, index) => (            
             <div key={index} className="quiz-question">
               <p>Question: {item.question}</p>
-              <ListQuizQuestions
-                item={item}
-                handleAnswer={handleAnswer}
-                index={index}
-              />
+              <div className="quiz-answer-list">
+                {item.shuffledOptions.map((option, i) => (
+                  <button 
+                    className="quiz-answer" 
+                    key={`item${i + 1}${index}`} 
+                    id={`item${i + 1}${index}`} 
+                    value={option} 
+                    onClick={(e) => handleAnswer(e, index, i + 1)}
+                  >
+                    {`${option}`}
+                  </button>
+                ))}
+              </div>
             </div>
           ))}
           <button onClick={handleSubmitQuiz}>Go To Results</button>

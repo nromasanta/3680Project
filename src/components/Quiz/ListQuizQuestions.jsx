@@ -17,7 +17,7 @@ const ListQuizQuestions = memo(function ListQuizQuestions({ item, handleAnswer, 
   const shuffledOptions = shuffleArray(options);
 
   return (
-    <div>
+    <div className="quiz-answer-list">
       {shuffledOptions.map((option, i) => (
         <button 
           className="quiz-answer"
@@ -26,7 +26,7 @@ const ListQuizQuestions = memo(function ListQuizQuestions({ item, handleAnswer, 
           value={option} 
           onClick={(e) => handleAnswer(e, index, i + 1)}
         >
-          {`${i + 1}. ${option}`}
+          {`${option}`}
         </button>
       ))}
     </div>
