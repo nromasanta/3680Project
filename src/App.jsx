@@ -12,6 +12,7 @@ import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import About from './pages/About.jsx'
 import Quiz from './pages/Quiz.jsx'
+import QuizResults from './pages/QuizResults.jsx'
 
 const App = () => {
   return (
@@ -27,6 +28,7 @@ const App = () => {
               <Route element={<ProtectedRoute />}>
                 <Route path="/create" element={<Create />} />
                 <Route path="/quiz/:id" element ={<Quiz />} />
+                <Route path="/quiz/result/:id" element ={<QuizResults />} />
               </Route>
               <Route path="/allquizzes" element={<AllQuizzes />} />
               <Route path="/about" element={<About />} />
