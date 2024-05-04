@@ -15,7 +15,7 @@ const Footer = () => {
   };
 
   return shouldDisplayFooter() ? (
-    <div className='footer container'>
+    <div className='footer set-container'>
       <div className='footer-section'>
         <div className='footer-links'>
           <div className='footer-links-div'>

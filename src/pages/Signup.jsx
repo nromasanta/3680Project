@@ -2,15 +2,19 @@ import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 import '../styles/Signup.css'
 import { Link } from 'react-router-dom';
+import userIcon from '../imgs/user.png'
+import password from '../imgs/password.png'
+import email from '../imgs/email.png'
+import { useNavigate } from 'react-router-dom';
 
 const Signup = () => {
-  const [loginRequest, setLoginRequest] = useState(false);
+  const [signupRequest, setsignupRequest] = useState();
   const [existingUserError, setExistingUserError] = useState(false);
   const [user, setUser] = useState({ email: null, username: null, password: null });
-
+  const navigate = useNavigate();
 
   useEffect(() => {
-    if (loginRequest) {
+    if (signupRequest) {
       const callLogin = async () => {
         try {
           const response = await axios.post(
@@ -20,8 +24,12 @@ const Signup = () => {
           console.log("Response status ->", response.status);
           if (response.status === 200) {
             console.log("User successfully created");
+            setExistingUserError(false);
+            navigate('/login');
+
           } else if (response.status === 201) {
             console.log("User already exists");
+            setExistingUserError(true);
           }
         } catch (err) {
           console.log("Unknown error ->", err);
@@ -29,7 +37,7 @@ const Signup = () => {
       };
       callLogin();
     }
-  }, [loginRequest]);
+  }, [signupRequest]);
 
   const saveUserData = (e) => {
     e.preventDefault();
@@ -42,7 +50,7 @@ const Signup = () => {
         username: newUsername,
         password: newPassword,
       });
-      setLoginRequest(true);
+      setsignupRequest(newUsername);
     } else {
       console.log("Please enter a username and password!");
     }
@@ -56,7 +64,7 @@ const Signup = () => {
     }, [user]);
 
   return (
-    <div className='container signup-page'>
+    <div className='set-container signup-page'>
     <div className='signup-container'>
       <form className='signup-form'>
         <div className='signup-title'>
@@ -70,39 +78,53 @@ const Signup = () => {
         </div>
         <div className='signup-content'>
 
-            <label className='signup-label'>
-              <p>Email <span>*</span></p>
-              <input
-              type='email'
-              id='email'
-              className='signup-input'
-              required
-              />
-            </label>
+          <div className='signup-label-container'>
+              <label className='signup-label'>
+                <img src={email}/>
+                <input
+                  type='email'
+                  id='email'
+                  className='signup-input'
+                  placeholder='Email'
+                  required
+                />
+              </label>
+            </div>
             
-            <label className='signup-label'>
-              <p>Username <span>*</span></p>
-              <input
-              type='username'
-              id='username'
-              className='signup-input'
-              required
-              />
-            </label>
+            <div className='signup-label-container'>
+              <label className='signup-label'>
+                <img src={userIcon}/>
+                <input
+                  type='username'
+                  id='username'
+                  className='signup-input'
+                  placeholder='Username'
+                  required
+                />
+              </label>
+            </div>
 
-            <label className='signup-label'>
-              <p>Password <span>*</span></p>
-              <input
-              type='password'
-              id='password'
-              className='signup-input'
-              required
-              />
-            </label>
+            <div className='signup-label-container'>
+              <label className='signup-label'>
+                <img src={password}/>
+                <input
+                  type='password'
+                  id='password'
+                  className='signup-input'
+                  placeholder='Password'
+                  required
+                />
+              </label>
+            </div>
+
           <div className='signup-button-can'>
             <button className='signup-button' onClick={(e) => saveUserData(e)}>
               Create an Account
             </button>
+            { existingUserError ? (
+              <p className='error'>Username already taken</p>
+
+            ) : (<div> </div>)}
             <p className='signup-button-text'>By registering, you agree to QuizCraft's
               <Link to=''>
                 <span className='signup-button-link'>{' '}Terms of Service.</span>
