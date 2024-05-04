@@ -99,10 +99,16 @@ const Quiz = () => {
     return (
       <div className="quiz-page content set-container">
         <div className="quiz-page-container">
-          <p>{quizFullJson.quizName}</p>
+          <p className="quiz-title">{quizFullJson.quizName}</p>
+
+          <hr />
+
           {quizQuestions.map((item, index) => (            
-            <div key={index} className="quiz-question">
-              <p>Question: {item.question}</p>
+            <div key={index} className="quiz-each-question">
+              <p className="quiz-question">
+                <span className="font-bold">Question: </span>
+                {item.question}
+              </p>
               <div className="quiz-answer-list">
                 {item.shuffledOptions.map((option, i) => (
                   <button 
@@ -118,7 +124,12 @@ const Quiz = () => {
               </div>
             </div>
           ))}
-          <button onClick={handleSubmitQuiz}>Go To Results</button>
+          <button 
+          className="quiz-submit-button"
+          onClick={handleSubmitQuiz}
+          >
+            Complete Quiz
+          </button>
         </div>
       </div>
     );
