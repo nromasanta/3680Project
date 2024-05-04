@@ -4,6 +4,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
 import Select from "react-select";
+import logo from "../imgs/logo.png";
+import "../styles/AllQuizzes.css"
 
 const AllQuizzes = () => {
   const [quizzes, setQuizzes] = useState();
@@ -75,30 +77,60 @@ const AllQuizzes = () => {
     <p>Loading...</p>;
   } else {
     return (
-      <div className="temp-page">
-        <Select
-          placeholder={tag || "Select Filter..."}
-          options={tags}
-          onChange={(e) => handleSelectChange(e)}
-        />
-        {displayedQuizzes.length > 0 ? (
-          displayedQuizzes.map((item, index) => (
-            <div key={item.uuidv} className="m-6">
-              <h1> {item.quizName} </h1>
-              <h1> Quiz Length: {item.quizLength} </h1>
-              <h1> Category: {item.quizType} </h1>
-              <h1> Author: {item.author.username} </h1>
-              <h1> Avg score per user: {item.quizAvg.toFixed(2)} </h1>
-              <h1> Hits/Viewcount: {item.viewCount}</h1>
-              <button className="text-red-500" onClick={() => handleQuizRedirect(item._id)}>
-                Take Quiz
-              </button>
-            </div>
-          ))
-        ) : (
-          <div> No quizzes found</div>
-        )}
-      </div>
+      <div className="all-page content set-container">
+        <div className="all-page-container">
+          <p className="all-page-header">
+            Quizzes
+          </p>
+          <Select
+            placeholder={tag || "Select Filter..."}
+            options={tags}
+            onChange={(e) => handleSelectChange(e)}
+          />
+
+          <div className="all-quizzes">
+            {displayedQuizzes.length > 0 ? (
+              displayedQuizzes.map((item, index) => (
+                <div key={item.uuidv} className="all-each-quiz">
+                  <img src={logo} className="all-quiz-img" onClick={() => handleQuizRedirect(item._id)}/>
+                  <div className="all-quiz-content">
+                    <p className="all-quiz-title" onClick={() => handleQuizRedirect(item._id)}> {item.quizName} </p>
+                    <div className="all-quiz-questions">
+                      <div className="all-quiz-questions-l">
+                        <p> 
+                          <span className="font-bold">Author: </span> 
+                          {item.author.username} 
+                        </p>
+                        <p> 
+                          <span className="font-bold">Tags: </span> 
+                          {item.quizType} 
+                        </p>
+                      </div>
+                      <div className="all-quiz-questions-r">
+                        <p> 
+                          <span className="font-bold">Questions: </span> 
+                          {item.quizLength} 
+                        </p>
+                        <p> 
+                          <span className="font-bold">Average Score: </span> 
+                          {item.quizAvg.toFixed(2)} 
+                        </p>
+                        <p> 
+                          <span className="font-bold">Views: </span> 
+                          {item.viewCount}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))
+            ) : (
+              <div>Uh oh. No one's made a quiz for that category yet.</div>
+            )}
+          </div>
+
+        </div>
+       </div>
     );
   }
 };

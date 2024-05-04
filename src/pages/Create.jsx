@@ -200,7 +200,11 @@ const Create = () => {
                       />
                     </label>
                   </div>
-                  <button type="button" onClick={() => deleteQuestion(index)}>
+                  <button 
+                    className="login-btn create-button" 
+                    type="button" 
+                    onClick={() => deleteQuestion(index)}
+                    >
                     Delete
                   </button>
                 </div>
@@ -217,11 +221,19 @@ const Create = () => {
 
           <div className="create-tags">
             <p className="create-title-label">Step 3: Tags</p>
-            <Select
-              placeholder={tag || "Select tag..."}
-              options={tags}
-              onChange={(e) => handleSelectChange(e)}
-            />
+            <div className="create-tag-select">
+              <Select
+                styles={{
+                  control: (baseStyles, state) => ({
+                    ...baseStyles,
+                    width: 200,
+                  }),
+                }}
+                placeholder={tag || "Select tag..."}
+                options={tags}
+                onChange={(e) => handleSelectChange(e)}
+              />
+            </div>
           </div>
 
           <hr />
