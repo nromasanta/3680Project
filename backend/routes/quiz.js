@@ -1,5 +1,5 @@
 import express from 'express';
-import { createQuiz, findQuiz, findAllQuizzes, publishScore, getLeaderboard, updateViewcount } from '../controllers/quizController.js';
+import { createQuiz, findQuiz, findAllQuizzes, publishScore, getLeaderboard, updateViewcount, getTopQuizzes } from '../controllers/quizController.js';
 
 const router = express.Router();
 
@@ -15,6 +15,7 @@ router.get('/all', findAllQuizzes);
 
 router.get('/leaderboard/:id', getLeaderboard);
 
+router.get('/topQuizzes', getTopQuizzes);
 
 
 export default router;

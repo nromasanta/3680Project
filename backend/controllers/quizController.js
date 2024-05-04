@@ -99,7 +99,7 @@ const publishScore = async (req, res) => {
 const getLeaderboard = async (req, res) => {
   const { id } = req.params;
   try {
-    const quiz = await Quiz.findById({_id: id}).populate("leaderboard.user").sort({score: 1});
+    const quiz = await Quiz.findById(id).populate("leaderboard.user").sort({score: 1});
     // console.log("Found: ", quiz);
     console.log("Leaderboard: ", quiz.leaderboard);
     return res.status(200).json(quiz.leaderboard);
@@ -108,6 +108,16 @@ const getLeaderboard = async (req, res) => {
     return res.status(400);
   }
 };
+
+const getTopQuizzes = async (req, res) => {
+  try {
+    const quiz = await Quiz.find({}).populate("author").sort({viewCount: -1});
+    return res.status(200).json(quiz);
+  } catch (err) {
+    console.log("Err -> ", err);
+    return res.status(400);
+  }
+}
 
 const updateViewcount = async (req, res) => {
   const { id } = req.params;
@@ -123,4 +133,4 @@ const updateViewcount = async (req, res) => {
 
 };
 
-export { createQuiz, findQuiz, findAllQuizzes, publishScore, getLeaderboard, updateViewcount};
+export { createQuiz, findQuiz, findAllQuizzes, publishScore, getLeaderboard, updateViewcount, getTopQuizzes};
