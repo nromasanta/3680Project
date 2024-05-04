@@ -1,0 +1,30 @@
+.quiz-page {
+  width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.quiz-page-container {
+  display: flex;
+  background-color: white;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  padding: 3rem 4rem 3rem 4rem;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  gap: 2rem;
+}
+
+.quiz-question {
+  display: flex;
+  flex-direction: column;
+}
+
+.quiz-answer {
+  
+}

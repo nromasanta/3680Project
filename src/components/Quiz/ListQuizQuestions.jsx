@@ -1,56 +1,36 @@
 import { memo } from "react";
+import "../../styles/Quiz.css"
 
-  const ListQuizQuestions = memo(function ListQuizQuestions({item, handleAnswer, index}) {
-    let number = item.number[index];
-    if (number === 1) {
-      return (
-        <div>
-          <button id = {'item1' + index} value = {item.answer} onClick = {(e) => handleAnswer(e, index, 1)} > 1. {item.answer} </button>
-          <button id = {'item2' + index} value = {item.option2} onClick = {(e) => handleAnswer(e, index, 2)}> 2. {item.option2} </button>
-          <button id = {'item3' + index} value = {item.option3} onClick = {(e) => handleAnswer(e, index, 3)}> 3. {item.option3} </button>
-        </div>
-      );
-    } else if (number === 2) {
-      return (
-        <div>
-          <button id = {'item1' + index} value = {item.option2} onClick = {(e) => handleAnswer(e, index, 1)}> 1. {item.option2} </button>
-          <button id = {'item2' + index} value = {item.answer} onClick = {(e) => handleAnswer(e, index, 2)}> 2. {item.answer} </button>
-          <button id = {'item3' + index} value = {item.option3} onClick = {(e) => handleAnswer(e, index, 3)}> 3. {item.option3} </button>
-        </div>
-      );
-    } else if (number === 3) {
-      return (
-        <div>
-          <button id = {'item1' + index} value = {item.option2} onClick = {(e) => handleAnswer(e, index, 1)}> 1. {item.option2} </button>
-          <button id = {'item2' + index} value = {item.option3} onClick = {(e) => handleAnswer(e, index, 2)}> 2. {item.option3} </button>
-          <button id = {'item3' + index} value = {item.answer} onClick = {(e) => handleAnswer(e, index, 3)}> 3. {item.answer} </button>
-        </div>
-      );
-    } else if (number === 4) {
-      return (
-        <div>
-          <button id = {'item1' + index} value = {item.option3} onClick = {(e) => handleAnswer(e, index, 1)}> 1. {item.option3} </button>
-          <button id = {'item2' + index} value = {item.option2} onClick = {(e) => handleAnswer(e, index, 2)}> 2. {item.option2} </button>
-          <button id = {'item3' + index} value = {item.answer} onClick = {(e) => handleAnswer(e, index, 3)}> 3. {item.answer} </button>
-        </div>
-      );
-    } else if (number === 5) {
-      return (
-        <div>
-          <button id = {'item1' + index} value = {item.answer} onClick = {(e) => handleAnswer(e, index, 1)}> 1. {item.answer} </button>
-          <button id = {'item2' + index} value = {item.option3} onClick = {(e) => handleAnswer(e, index, 2)}> 2. {item.option3} </button>
-          <button id = {'item3' + index} value = {item.option2} onClick = {(e) => handleAnswer(e, index, 3)}> 3. {item.option2} </button>
-        </div>
-      );
-    } else if (number === 6) {
-      return (
-        <div>
-          <button id = {'item1' + index} value = {item.option3} onClick = {(e) => handleAnswer(e, index, 1)}> 1. {item.option3} </button>
-          <button id = {'item2' + index} value = {item.answer} onClick = {(e) => handleAnswer(e, index, 2)}> 2. {item.answer} </button>
-          <button id = {'item3' + index} value = {item.option2} onClick = {(e) => handleAnswer(e, index, 3)}> 3. {item.option2} </button>
-        </div>
-      );
-    }
-  });
+const shuffleArray = (array) => {
+  // added a shuffle sequence
+  // see https://en.wikipedia.org/wiki/Fisher%E2%80%93Yates_shuffle
+  // for the algorithm
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+};
 
-  export default ListQuizQuestions;
+const ListQuizQuestions = memo(function ListQuizQuestions({ item, handleAnswer, index }) {
+  const options = [item.answer, item.option2, item.option3];
+  const shuffledOptions = shuffleArray(options);
+
+  return (
+    <div>
+      {shuffledOptions.map((option, i) => (
+        <button 
+          className="quiz-answer"
+          key={`item${i + 1}${index}`} 
+          id={`item${i + 1}${index}`} 
+          value={option} 
+          onClick={(e) => handleAnswer(e, index, i + 1)}
+        >
+          {`${i + 1}. ${option}`}
+        </button>
+      ))}
+    </div>
+  );
+});
+
+export default ListQuizQuestions;
