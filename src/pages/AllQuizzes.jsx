@@ -47,8 +47,10 @@ const AllQuizzes = () => {
           <h1> {item.quizName} </h1>
           <h1> Quiz Length: {item.quizLength} </h1>
           <h1> Category: {item.quizType} </h1>
-          <h1> By: {item.author.username} </h1>
-          <button onClick = {() => handleQuizRedirect(item._id)}> Take Quiz </button>
+          <h1> Author: {item.author.username} </h1>
+          <h1> Avg score per user: {item.quizAvg.toFixed(2)} </h1>
+          <h1> Hits/Viewcount: {item.viewCount}</h1>
+          <button className = "text-red-500" onClick = {() => handleQuizRedirect(item._id)}> Take Quiz </button>
         </div>
       ))}
     </div>

@@ -38,6 +38,27 @@ const quizSchema = new Schema({
     quizType: {
         type: String,
         required: true
+    },
+    leaderboard: [
+        {
+            user: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: 'User',
+                required: true
+            },
+            score: {
+                type: Number,
+                default: null
+            }
+        }
+    ],
+    quizAvg: {
+        type: Number,
+        default: 0
+    },
+    viewCount: {
+        type: Number,
+        default: 0
     }
 }, { timestamps: true });
 

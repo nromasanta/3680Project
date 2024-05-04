@@ -52,13 +52,75 @@ const findQuiz = async (req, res) => {
 const findAllQuizzes = async (req, res) => {
   try {
     const quizzes = await Quiz.find({}).populate("author");
-
     console.log("Quizzes returned -> ", quizzes);
-
     return res.status(200).json(quizzes);
   } catch (err) {
-    return res.status(400).send();
+    console.log("err->", err);
+    return res.status(400);
   }
 };
 
-export { createQuiz, findQuiz, findAllQuizzes };
+const publishScore = async (req, res) => {
+  const { id } = req.params;
+  const { user, score } = req.body;
+  const jsonBody = {
+    user: user,
+    score: score,
+  };
+  try {
+    const quiz = await Quiz.findById(id);
+    console.log(quiz);
+    quiz.leaderboard.push(jsonBody);
+    await quiz.save();
+    let publishedCount = quiz.leaderboard.length;
+    let total = 0;
+    if (publishedCount > 0) {
+      for(let i = 0; i < publishedCount; i++) {
+        total = total + quiz.leaderboard[i].score;
+      }
+      let average = (total / publishedCount);
+      quiz.quizAvg = average;
+      // console.log("total ->", total);
+      // console.log("PC ->", publishedCount);
+      // console.log("avg ->", average);
+    } else {
+      let average = quiz.leaderboard[0].score;
+      quiz.quizAvg = average;
+    }
+    await quiz.save();
+    return res.status(200).json(quiz);
+    
+  } catch (err) {
+    console.log("Err-> ", err);
+    return res.status(400);
+  }
+};
+
+const getLeaderboard = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const quiz = await Quiz.findById({_id: id}).populate("leaderboard.user").sort({score: 1});
+    // console.log("Found: ", quiz);
+    console.log("Leaderboard: ", quiz.leaderboard);
+    return res.status(200).json(quiz.leaderboard);
+  } catch (err) {
+    console.log("Err -> ", err);
+    return res.status(400);
+  }
+};
+
+const updateViewcount = async (req, res) => {
+  const { id } = req.params;
+  try {
+    const quiz = await Quiz.findById(id);
+    quiz.viewCount = quiz.viewCount + 1;
+    quiz.save();
+    return res.status(200).json(quiz.leaderboard);
+  } catch (err) {
+    console.log("Err -> ", err);
+    return res.status(400);
+  }
+
+};
+
+export { createQuiz, findQuiz, findAllQuizzes, publishScore, getLeaderboard, updateViewcount};

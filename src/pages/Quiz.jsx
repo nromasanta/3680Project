@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../auth/authProvider";
 import axios from "axios";
-import ListQuizQuestions from "../components/ListQuizQuestions";
+import ListQuizQuestions from "../components/Quiz/ListQuizQuestions";
 import { useNavigate } from "react-router-dom";
 
 const Quiz = () => {
@@ -51,7 +51,18 @@ const Quiz = () => {
         console.log(err);
       }
     };
+
+    const updateViewcount = async () => {
+      try {
+        await axios.post(
+          `http://localhost:4000/api/quizzes/viewcount/${quizId}`
+        );
+      } catch (err) {
+        console.log(err);
+      }
+    };
     getQuiz();
+    updateViewcount();
   }, []);
 
   const handleSubmitQuiz = (e) => {
