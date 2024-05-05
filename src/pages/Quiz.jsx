@@ -106,7 +106,7 @@ const Quiz = () => {
           {quizQuestions.map((item, index) => (            
             <div key={index} className="quiz-each-question">
               <p className="quiz-question">
-                <span className="font-bold">Question: </span>
+                <span className="font-bold">Question:</span>
                 {item.question}
               </p>
               <div className="quiz-answer-list">
@@ -124,12 +124,14 @@ const Quiz = () => {
               </div>
             </div>
           ))}
-          <button 
-          className="quiz-submit-button"
-          onClick={handleSubmitQuiz}
-          >
-            Complete Quiz
-          </button>
+          <div className="quiz-button">
+            <button 
+            className="quiz-submit-button"
+            onClick={handleSubmitQuiz}
+            >
+              Complete Quiz
+            </button>
+          </div>
         </div>
       </div>
     );

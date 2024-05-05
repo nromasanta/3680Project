@@ -1,5 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
+import "../../styles/Results.css"
+import medal from "../../imgs/medal.png"
 
 const QuizLeaderboard = ({ quizId }) => {
   const [quizLb, setQuizLb] = useState([]);
@@ -31,12 +33,24 @@ const QuizLeaderboard = ({ quizId }) => {
     )
   }
   return(
-    <div>
-        {quizLb.map((item, index) => (
-            <div>
-                <h1> {index + 1}. {item.user.username} - {item.score}</h1>
-            </div>
-  ))}
+    <div className="results-lb-content">
+      {quizLb.map((item, index) => (
+        <div 
+          className=
+          {`results-lb-item 
+          ${index === 0 ? "first-place" 
+          : index === 1 ? "second-place" 
+          : index === 2 ? "third-place" : ''}`} 
+          key={index}
+        >
+          <p className="results-lb-text">
+            {index === 0 && <img src={medal} className=" medal-img first-place"/>}
+            {index === 1 && <img src={medal} className="medal-img second-place" />}
+            {index === 2 && <img src={medal} className="medal-img third-place" />}
+            {`${index > 2 ? index + 1 + ". " : ""}${item.user.username} - ${item.score}`}
+          </p>
+        </div>
+      ))}
     </div>
   );
 };
