@@ -28,7 +28,6 @@ const createComment = async (req, res) => {
 
 const findQuizComments = async (req, res) => {
     try {
-        console.log("req.body -> ", req.body);
         const { quizId } = req.body;
 
         const quizComments = await Comment.find({ quizId: quizId });
@@ -36,8 +35,6 @@ const findQuizComments = async (req, res) => {
         if (!quizComments) {
             return res.status(201).send();
         }
-        console.log("received -> ", req.body);
-        console.log("got from db -> ", quizComments);
 
         return res.status(200).json(quizComments);
     } catch (err) {

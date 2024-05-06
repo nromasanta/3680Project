@@ -65,6 +65,29 @@ function QuizResults() {
       console.log("Error publishing comment: ", err);
     }
   };
+
+  const getComments = async () => {
+    let id;
+    try {
+      const res = await axios.get(
+        `http://localhost:4000/api/comments/quiz`,
+        quizId
+      );
+      id = res.data.userID;
+      console.log(res);
+    } catch (err) {
+        console.log("Error:", err);
+    }
+   try {
+      const res = await axios.get(
+        `http://localhost:4000/api/user${id}`
+      )
+console.log(res);
+    } catch (err) {
+      console.log("Error: ", err);
+    }
+  };
+
   return (
     <div className="results-page content set-container">
       <div className="results-page-container">
@@ -131,6 +154,8 @@ function QuizResults() {
 
           <div className="results-comments-shown">
             <p>Comments:</p>
+            <button onClick={() => getComments()}>Test</button>
+            <p id="Comment"></p>
           </div>
         </div>
 
