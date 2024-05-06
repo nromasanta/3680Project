@@ -92,7 +92,11 @@ const getSingleUser = async (req, res) => {
 
 const updateUser = async (req, res) => {
 
-  const { newUsername, newPassword, userId } = req.body;
+  const { newUsername, newPassword, newEmail, userId } = req.body;
+  console.log("newUsername->", newUsername);
+  console.log("newPassword->", newPassword);
+  console.log("newEmail->", newEmail);
+  console.log("userId->", userId);
   const user = await User.findById(userId);
   if (!mongoose.Types.ObjectId.isValid(userId)) {
     return res.status(404).json({ error: "No such user " });
@@ -100,9 +104,11 @@ const updateUser = async (req, res) => {
   console.log("Found user -->", user);
   
   if (newUsername != null) {
-    user.username = newUsername;;
+    user.username = newUsername;
   }
-
+  if (newEmail != null) {
+    user.email = newEmail;
+  }
   if (newPassword != null) {
     user.password = newPassword;
   }

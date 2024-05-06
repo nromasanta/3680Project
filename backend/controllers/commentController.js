@@ -7,20 +7,19 @@ import mongoose from "mongoose";
 const createComment = async (req, res) => {
     try {
         console.log("Received: ", req.body);
-        const { userID, quizID, comment, rating } = req.body;
-        console.log("received userID -> ", userID);
-        console.log("received quizID -> ", quizID);
+        const { userID, quizID, comment} = req.body;
+        console.log("received userId -> ", userID);
+        console.log("received quizId -> ", quizID);
         console.log("received comment -> ", comment);
-        console.log("received rating -> ", rating);
-
-        const newComment = new Comment({
+        console.log("Before Create");
+        const newComment = await Comment.create({
             userID: userID,
             quizID: quizID,
             comment: comment,
-            rating: rating,
-        });
-
-        await newComment.save();
+        },
+    console.log("inside Create"));
+    console.log("After create");
+        console.log("New Comment Created -> ", newComment)
         return res.status(200).send();
     } catch (err) {
         return res.status(400).send();
@@ -30,9 +29,9 @@ const createComment = async (req, res) => {
 const findQuizComments = async (req, res) => {
     try {
         console.log("req.body -> ", req.body);
-        const { quizID } = req.body;
+        const { quizId } = req.body;
 
-        const quizComments = await Comment.find({ quizID: quizID });
+        const quizComments = await Comment.find({ quizId: quizId });
         console.log("Quiz Comments-> ", quizComments);
         if (!quizComments) {
             return res.status(201).send();
@@ -49,9 +48,9 @@ const findQuizComments = async (req, res) => {
 // get all users - returns array of JSON objects
 const findUserComments = async (req, res) => {
     console.log("req.body -> ", req.body);
-    const { userID } = req.body;
+    const { userId } = req.body;
 
-    const userComments = await Comment.find({ userID: userID });
+    const userComments = await Comment.find({ userId: userId });
     console.log("Users Comments -> ", userComments);
     if (!userComments) {
         return res.status(201).send();
@@ -66,10 +65,10 @@ const findUserComments = async (req, res) => {
 const findRandomComment = async (req, res) => {
 
     console.log("req.body -> ", req.body);
-    const { quizID } = req.body;
+    const { quizId } = req.body;
     const randomComment = await Comment.aggregate(
         [
-            { $match: { quizID: quizID } },
+            { $match: { quizId: quizId } },
             { $sample: { size: 1 } }
         ]);
     console.log("Quiz Comment-> ", randomComment);

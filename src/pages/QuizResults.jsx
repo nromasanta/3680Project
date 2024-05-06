@@ -49,6 +49,25 @@ function QuizResults() {
     }
   };
 
+  const publishComment = async () => {
+    let userComment = document.getElementById("comment").value;
+
+    const comment = {
+      userID: userId,
+      quizID: quizId,
+      comment: userComment,
+    };
+
+    try {
+      const res = await axios.post(
+        `http://localhost:4000/api/comments`,
+        comment
+      );
+      console.log(res);
+    } catch (err) {
+      console.log("Error publishing comment: ", err);
+    }
+  };
   return (
     <div>
       <h1>Percent correct: {percentage}% </h1>
@@ -68,7 +87,8 @@ function QuizResults() {
 
       <div>
         <h1>Leave a comment:</h1>
-        <textarea></textarea>
+        <textarea id="comment"></textarea>
+        <button onClick={() => publishComment()}>Join the Conversation</button>
       </div>
 
       <div>
