@@ -58,10 +58,6 @@
   margin-top: 10px;
 }
 
-.login-title {
-  
-}
-
 .login-return {
   display: flex;
   justify-content: flex-start;
@@ -170,7 +166,7 @@ label span {
 
 .error {
   color:red;
-  margin-top: 2px;
+  margin-top: 3px;
 }
 
 button.signup-button {

@@ -13,10 +13,14 @@ const Navbar = () => {
     return !excludePathnames.includes(location.pathname);
   };
 
-  const darkBackground = () => {
-    const darkBackgroundPathnames = ['/create', '/allquizzes'];
-    return displayNavbar() && (darkBackgroundPathnames.includes(location.pathname) || location.pathname === '');
-  };
+const darkBackground = () => {
+  const darkBackgroundPathnames = ['/create', '/allquizzes', '/quiz', '/result'];
+  const pathname = location.pathname;
+
+  const shouldInclude = darkBackgroundPathnames.some(path => pathname.startsWith(path));
+
+  return displayNavbar() && (shouldInclude || pathname === '');
+};
 
   return displayNavbar() ? (
     <nav className={`navbar set-container ${darkBackground() ? 'dark-nav' : ''}`}>

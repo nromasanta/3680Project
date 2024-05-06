@@ -33,7 +33,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 90%;
   gap: 2rem;
   margin-bottom: 2rem;
 }
@@ -46,7 +46,7 @@
 }
 
 .create-label {
-  width: 80%;
+  width: 90%;
   padding: 10px 25px 10px 25px;
   display: flex;
   flex-direction: column;
@@ -59,7 +59,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 80%;
+  width: 90%;
 }
 
 .create-title-label {
@@ -126,17 +126,23 @@
   justify-content: center;
   align-items: center;
   gap: 2rem;
-  width: 80%;
+  width: 90%;
   margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
 .create-tags {
   display: flex;
-  width: 80%;
-  justify-content: center;
+  flex-direction: column;
+  width: 90%;
+  align-items: center;
   margin-top: 2rem;
   margin-bottom: 2rem;
+  gap: 2rem;
+}
+
+.craete-tag-select {
+  display: flex;
 }
 
 .create-page-header {
@@ -164,5 +170,11 @@
 
   .create-content {
     width: 100%;
+  }
+
+  .create-answers {
+    margin-top: 1rem;
+    justify-content: center;
+    align-items: center;
   }
 }
