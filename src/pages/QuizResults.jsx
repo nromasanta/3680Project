@@ -3,16 +3,24 @@ import { useLocation } from "react-router-dom";
 import { useAuth } from "../auth/authProvider.jsx";
 import axios from "axios";
 import QuizLeaderboard from "../components/Quiz/QuizLeaderboard.jsx";
-import "../styles/Results.css"
+import "../styles/Results.css";
 import { useRafState } from "react-use";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faStar as solidStar } from "@fortawesome/free-solid-svg-icons";
+import { faStar as regularStar } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as regularHeart } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as solidHeart } from "@fortawesome/free-solid-svg-icons";
 
 function QuizResults() {
   const { userId } = useAuth();
   const { state: { answerArray, selectedArray, quizLength, quizFullJson } } = useLocation();
   const { _id: quizId, quizName, questions } = quizFullJson;
   const [percentage, setPercentage] = useState(0);
-  const[comments, setComments] = useState();
+  const [comments, setComments] = useState([]);
   const [likes, setLikes] = useState([]);
+  const [likedComments, setLikedComments] = useState({});
+  const [rating, setRating] = useState(null); // State to hold the rating
+
   useEffect(() => {
     console.log("Answer Array => ", answerArray);
     console.log("Selected Array => ", selectedArray);
@@ -51,14 +59,7 @@ function QuizResults() {
 
   const publishComment = async () => {
     let userComment = document.getElementById("comment").value;
-    var userRating = document.getElementsByName("rating");
-    var rating;
-    for (var i = 0, length = userRating.length; i< length; i++ ) {
-      if (userRating[i].checked) {
-          rating = userRating[i].value;
-      }
-    }
-
+    
     const comment = {
       userID: userId,
       quizID: quizId,
@@ -104,20 +105,37 @@ function QuizResults() {
         console.log("Error:", err);
     }
   };
- 
-  const updateLikes = async (id) => {
+
+  const handleLike = async (commentId) => {
     try {
-        const res = await axios.post(
-          `http://localhost:4000/api/comments/like`, {
-            commentId: id
-          }
-        );
-        console.log(res);
-        getComments();
+      // Check if the comment is already liked by the current user
+      const alreadyLiked = likedComments[commentId];
+
+      if (alreadyLiked) {
+        // If already liked, remove the like
+        await axios.delete(`http://localhost:4000/api/comments/like/${commentId}`);
+      } else {
+        // If not already liked, add the like
+        await axios.post(`http://localhost:4000/api/comments/like`, { commentId });
+      }
+
+      // Update the liked state for the comment
+      setLikedComments(prevState => ({
+        ...prevState,
+        [commentId]: !prevState[commentId]
+      }));
+
+      // Fetch comments after updating like status
+      getComments();
     } catch (err) {
       console.log("Error: ", err);
     }
   };
+
+  const handleRatingChange = (value) => {
+    setRating(value);
+  };
+
 
   return (
     <div className="results-page content set-container">
@@ -136,81 +154,102 @@ function QuizResults() {
                 {item.question}
               </p>
 
-              <p className="results-correct-answer"> 
-                <span 
-                className="results-correct-answer font-bold mr-1 text-green-500"
-                >
+              <p className="results-correct-answer">
+                <span className="results-correct-answer font-bold mr-1 text-green-500">
                   Correct Answer:
-                </span> 
-              {item.answer}
+                </span>
+                {item.answer}
               </p>
 
-              <p className="results-correct-answer"> 
-              <span 
-              className={`font-bold mr-1 ${item.answer === selectedArray[index] 
-              ? "results-correct" : "results-incorrect"}`}
-              >
-                You Answered:
-              </span> 
-              {selectedArray[index]}
-            </p>
+              <p className="results-correct-answer">
+                <span
+                  className={`font-bold mr-1 ${
+                    item.answer === selectedArray[index]
+                      ? "results-correct"
+                      : "results-incorrect"
+                  }`}
+                >
+                  You Answered:
+                </span>
+                {selectedArray[index]}
+              </p>
             </div>
           ))}
 
           <div className="flex justify-center">
-            <button 
-            onClick={publishScore}
-            className="results-post-button"
-            >
+            <button onClick={publishScore} className="results-post-button">
               Post Score
             </button>
           </div>
         </div>
 
-        <hr/>
+        <hr />
 
         <div className="results-leaderboard">
           <p className="results-lb-head quiz-title">Leaderboard:</p>
           <QuizLeaderboard quizId={quizId} />
         </div>
 
-        <hr/>
+        <hr />
 
-        <div className="results-comments">
-          <div className="results-comments-head">
-            <p>Leave a comment:</p>
-            <textarea id="comment"></textarea><br/>
-            <input type="radio" name="rating" value="1"></input>
-            <input type="radio" name="rating" value="2"></input>
-            <input type="radio" name="rating" value="3"></input>
-            <input type="radio" name="rating" value="4"></input>
-            <input type="radio" name="rating" value="5"></input><br/>
-            <button onClick={() => publishComment()}>Join the Conversation</button>
-      </div>
 
-          <div className="results-comments-shown">
-            <p>Comments:</p>
-            {comments && (
-            <div id="user-comments">
-                {comments.map((item,index) => (
-                  <div key={index} className="quiz-each-comment">
-                    <p className="quiz-comment-username">
-                      {item.username}
-                    </p>
-                    <p className="quiz-comment-comment">
-                      {item.comment}
-                    </p>
-                    <p className="quiz-comment-rating">
-                      {item.rating} stars
-                    </p>
-                    <p className="quiz-comment-likes cursor-pointer" onClick={() => updateLikes(item._id)}>
+        <div className="results-comments-head">
+          <div className="results-comments-actual">
+            <p className="results-comments-title">Leave a comment:</p>
+            <textarea id="comment"></textarea>
+          </div>
+
+          <div className="results-rating">
+            <p className="results-rating-title">Rate this quiz:</p>
+            <div className="results-rating-stars">
+              {[1, 2, 3, 4, 5].map((value) => (
+                <span
+                  key={value}
+                  className={`star ${value <= rating ? "filled" : ""}`}
+                  onClick={() => handleRatingChange(value)}
+                >
+                  {value <= rating ? (
+                    <FontAwesomeIcon icon={solidStar} className="results-star" size="lg"/>
+                  ) : (
+                    <FontAwesomeIcon icon={regularStar} className="results-star" size="lg"/>
+                  )}
+                </span>
+              ))}
+            </div>
+          </div>
+          
+          <button onClick={publishComment} className="results-post-button">Publish Review</button>
+        </div>
+
+        <hr />
+
+        <div className="results-comments-shown">
+          <p className="user-comments-title">User Comments:</p>
+          {comments && (
+            <div className="user-comments">
+              {comments.map((item, index) => (
+                <div key={index} className="quiz-each-comment">
+                  <div className="quiz-each-left">
+                    <p className="quiz-comment-username">Username: {item.username}</p>
+                    <p className="quiz-comment-comment">Comment: {item.comment}</p>
+                  </div>
+                  <div className="quiz-each-middle">
+                    <p className="quiz-comment-rating">Rating: {item.rating} stars</p>
+                    <p
+                      className="quiz-comment-likes cursor-pointer"
+                    >
                       {likes[index]} likes
                     </p>
                   </div>
-                ))}
+                  <div className="quiz-each-right">
+                  <button onClick={() => handleLike(item._id)}>
+                    <FontAwesomeIcon icon={likedComments[item._id] ? solidHeart : regularHeart} />
+                  </button>
+                  </div>
+                </div>
+              ))}
             </div>
-            )}
-          </div>
+          )}
         </div>
 
       </div>

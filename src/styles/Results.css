@@ -77,6 +77,7 @@
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
+  height: auto;
   overflow-y: scroll;
   width: 70%;
   gap: 0.25rem;
@@ -109,6 +110,116 @@
 .medal-img {
   width: 30px;
 }
+
+.filled {
+  fill:#000
+}
+
+.results-star:hover {
+  color: darkgray;
+}
+
+.results-comments {
+  display: flex;
+  flex-direction: column;
+}
+
+.results-comments-head {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.results-comments-actual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+
+.results-comments-title,
+.results-rating-title,
+.user-comments-title {
+  font-size: 20px;
+}
+
+.results-rating {
+  display: flex;
+  gap: 1.0rem;
+}
+
+.results-rating-stars {
+  display: flex;
+  flex-direction: row;
+  gap: 0.25rem;
+}
+
+#comment {
+  border: 2px solid #b1b1b1;
+  width: 400px;
+  height: 200px;
+  padding: 8px;
+}
+
+.results-comments-shown {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+
+.user-comments {
+  display: flex;
+  flex-direction: column;
+  width: 70%;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  height: auto;
+  overflow-y: scroll;
+}
+
+.quiz-each-comment {
+  display: flex;
+  gap: 1.5rem;
+  width: 100%;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #eaeaea;
+  justify-content: center;
+  align-items: center;
+}
+
+.quiz-each-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 45%;
+}
+
+.quiz-each-middle {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 45%;
+}
+
+.quiz-each-right {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 10%;
+}
+
 
 @media screen and (max-width: 1050px) {
   .results-page-container {
