@@ -14,7 +14,7 @@ const Navbar = () => {
   };
 
 const darkBackground = () => {
-  const darkBackgroundPathnames = ['/create', '/allquizzes', '/quiz', '/result'];
+  const darkBackgroundPathnames = ['/create', '/allquizzes', '/quiz', '/result', '/settings'];
   const pathname = location.pathname;
 
   const shouldInclude = darkBackgroundPathnames.some(path => pathname.startsWith(path));

@@ -67,6 +67,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  height: 430px;
 }
 
 .results-lb-head {
@@ -77,9 +78,10 @@
   margin-top: 2rem;
   display: flex;
   flex-direction: column;
+  align-items: center;
   height: auto;
   overflow-y: scroll;
-  width: 70%;
+  width: 100%;
   gap: 0.25rem;
 }
 
@@ -115,8 +117,20 @@
   fill:#000
 }
 
+.results-star {
+  color: gold
+}
+
 .results-star:hover {
-  color: darkgray;
+  color: rgb(255, 183, 0);
+}
+
+.results-heart {
+  color: rgb(246, 81, 81);
+}
+
+.results-heart:hover {
+  color: red;
 }
 
 .results-comments {
@@ -175,11 +189,9 @@
 .user-comments {
   display: flex;
   flex-direction: column;
-  width: 70%;
-  justify-content: center;
+  width: 90%;
   align-items: center;
-  gap: 1rem;
-  height: auto;
+  height: 430px;
   overflow-y: scroll;
 }
 
@@ -187,10 +199,15 @@
   display: flex;
   gap: 1.5rem;
   width: 100%;
-  padding-bottom: 8px;
+  padding: 8px;
   border-bottom: 1px solid #eaeaea;
   justify-content: center;
   align-items: center;
+}
+
+.quiz-comment-comment {
+  display: flex;
+  flex-direction: column;
 }
 
 .quiz-each-left {

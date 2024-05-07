@@ -147,7 +147,7 @@ const Create = () => {
                   required
                 />
               </label>
-              <label className="create-label ml-2">
+              <label className="create-label">
                 <input
                   type="text"
                   id="text"

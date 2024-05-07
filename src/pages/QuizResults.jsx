@@ -231,7 +231,10 @@ function QuizResults() {
                 <div key={index} className="quiz-each-comment">
                   <div className="quiz-each-left">
                     <p className="quiz-comment-username">Username: {item.username}</p>
-                    <p className="quiz-comment-comment">Comment: {item.comment}</p>
+                    <div className="quiz-comment-comment">
+                      <p>Comment:</p>
+                      <p className="flex flex-wrap">{item.comment}</p>
+                    </div>
                   </div>
                   <div className="quiz-each-middle">
                     <p className="quiz-comment-rating">Rating: {item.rating} stars</p>
@@ -243,7 +246,10 @@ function QuizResults() {
                   </div>
                   <div className="quiz-each-right">
                   <button onClick={() => handleLike(item._id)}>
-                    <FontAwesomeIcon icon={likedComments[item._id] ? solidHeart : regularHeart} />
+                    <FontAwesomeIcon 
+                    icon={likedComments[item._id] ? solidHeart : regularHeart} 
+                    className="results-heart"
+                    />
                   </button>
                   </div>
                 </div>

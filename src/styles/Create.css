@@ -60,6 +60,7 @@
   justify-content: center;
   align-items: center;
   width: 90%;
+  gap: 2rem;
 }
 
 .create-title-label {
@@ -176,5 +177,17 @@
     margin-top: 1rem;
     justify-content: center;
     align-items: center;
+  }
+
+  .create-title {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .create-header {
+    width: 100%;
   }
 }
