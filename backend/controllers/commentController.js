@@ -7,15 +7,17 @@ import mongoose from "mongoose";
 const createComment = async (req, res) => {
     try {
         console.log("Received: ", req.body);
-        const { userID, quizID, comment} = req.body;
+        const { userID, quizID, comment, rating} = req.body;
         console.log("received userId -> ", userID);
         console.log("received quizId -> ", quizID);
         console.log("received comment -> ", comment);
+        console.log("received rating -> ", rating)
         console.log("Before Create");
         const newComment = await Comment.create({
             userID: userID,
             quizID: quizID,
             comment: comment,
+            rating: rating,
         },
     console.log("inside Create"));
     console.log("After create");
@@ -79,4 +81,18 @@ const findRandomComment = async (req, res) => {
     console.log("got from db -> ", userComments);
     return res.status(200).json(randomComment);
 };
-export { createComment, findQuizComments, findUserComments, findRandomComment };
+
+const updateLike = async (req, res) => {
+    console.log("req.body -> ", req.body);
+    const { commentId } = req.body;
+
+    const oldLikes = await Comment.findOne({_id: commentId});
+
+    const newLikes = oldLikes.likes + 1;
+
+    const doc = await Comment.findOneAndUpdate({_id: commentId}, {likes: newLikes}, {new: true});
+    console.log("recieved from db ->", doc);
+    return res.status(200).json(doc);
+};
+
+export { createComment, findQuizComments, findUserComments, findRandomComment, updateLike };
