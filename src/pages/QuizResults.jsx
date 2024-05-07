@@ -4,13 +4,14 @@ import { useAuth } from "../auth/authProvider.jsx";
 import axios from "axios";
 import QuizLeaderboard from "../components/Quiz/QuizLeaderboard.jsx";
 import "../styles/Results.css"
+import { useRafState } from "react-use";
 
 function QuizResults() {
   const { userId } = useAuth();
   const { state: { answerArray, selectedArray, quizLength, quizFullJson } } = useLocation();
   const { _id: quizId, quizName, questions } = quizFullJson;
   const [percentage, setPercentage] = useState(0);
-
+  const[comments, setComments] = useState();
   useEffect(() => {
     console.log("Answer Array => ", answerArray);
     console.log("Selected Array => ", selectedArray);
@@ -25,6 +26,7 @@ function QuizResults() {
     }, 0);
     const percentCorrect = ((correctAnswerCount / quizLength) * 100).toFixed(2);
     setPercentage(percentCorrect);
+    getComments();
   }, [answerArray, selectedArray, quizLength, quizFullJson]);
 
   const publishScore = async () => {
@@ -67,27 +69,28 @@ function QuizResults() {
   };
 
   const getComments = async () => {
-    let id;
     try {
-      const res = await axios.get(
-        `http://localhost:4000/api/comments/quiz`,
-        quizId
+      const res = await axios.post(
+        `http://localhost:4000/api/comments/quiz`,{
+        quizId: quizId
+      }
       );
-      id = res.data.userID;
-      console.log(res);
+      var comment = res;
+      for (let i = 0; i <res.data.length; i++) {
+      var id = comment.data[i].userID;
+      const user = await axios.get(
+        `http://localhost:4000/api/users/${id}`
+      );
+      comment.data[i].username = user.data.username;
+    }
+    //console.log("Quiz Comments-> ", comment);
+      setComments(comment.data);
+      console.log("Comments: ",comments);
     } catch (err) {
         console.log("Error:", err);
     }
-   try {
-      const res = await axios.get(
-        `http://localhost:4000/api/user${id}`
-      )
-console.log(res);
-    } catch (err) {
-      console.log("Error: ", err);
-    }
   };
-
+ 
   return (
     <div className="results-page content set-container">
       <div className="results-page-container">
@@ -148,14 +151,14 @@ console.log(res);
         <div className="results-comments">
           <div className="results-comments-head">
             <p>Leave a comment:</p>
-            <textarea id="comment"></textarea>
+            <textarea id="comment"></textarea><br/>
             <button onClick={() => publishComment()}>Join the Conversation</button>
       </div>
 
           <div className="results-comments-shown">
             <p>Comments:</p>
-            <button onClick={() => getComments()}>Test</button>
-            <p id="Comment"></p>
+            <button onClick={() => getComments()}>Test</button><br/>
+            
           </div>
         </div>
 

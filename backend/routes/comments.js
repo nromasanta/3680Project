@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.post('/', createComment);
 
-router.get('/quiz', findQuizComments);
+router.post('/quiz', findQuizComments);
 
 router.get('/user', findUserComments);
 

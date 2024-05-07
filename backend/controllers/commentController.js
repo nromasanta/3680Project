@@ -28,9 +28,10 @@ const createComment = async (req, res) => {
 
 const findQuizComments = async (req, res) => {
     try {
+        console.log("req.body-> ",req.body);
         const { quizId } = req.body;
-
-        const quizComments = await Comment.find({ quizId: quizId });
+        console.log("QuizId-> ", quizId);
+        const quizComments = await Comment.find({ quizID: quizId });
         console.log("Quiz Comments-> ", quizComments);
         if (!quizComments) {
             return res.status(201).send();
