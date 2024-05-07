@@ -56,9 +56,9 @@ const loginUser = async (req, res) => {
       return res.status(201).send();
     } else if (result) {
       console.log("passwords match!");
-      let data = {signInTime: Date.now(), id};
+      let data = { signInTime: Date.now(), id };
       const token = jwt.sign(data, jwtSecretKey);
-      return res.status(200).json({auth: true, token: token, userId:myUser._id}).send();
+      return res.status(200).json({ auth: true, token: token, userId: myUser._id }).send();
     } else if (err) {
       console.log("Unknown error logging in ->", err);
       return res.status(400).send();
@@ -90,4 +90,31 @@ const getSingleUser = async (req, res) => {
   res.status(200).json(user);
 };
 
-export { getAllUsers, getSingleUser, createUser, loginUser };
+const updateUser = async (req, res) => {
+
+  const { newUsername, newPassword, newEmail, userId } = req.body;
+  console.log("newUsername->", newUsername);
+  console.log("newPassword->", newPassword);
+  console.log("newEmail->", newEmail);
+  console.log("userId->", userId);
+  const user = await User.findById(userId);
+  if (!mongoose.Types.ObjectId.isValid(userId)) {
+    return res.status(404).json({ error: "No such user " });
+  }
+  console.log("Found user -->", user);
+  
+  if (newUsername != null) {
+    user.username = newUsername;
+  }
+  if (newEmail != null) {
+    user.email = newEmail;
+  }
+  if (newPassword != null) {
+    user.password = newPassword;
+  }
+  await user.save()
+
+  return res.status(200).json({ message: "User updated" });
+}
+
+export { getAllUsers, getSingleUser, createUser, loginUser, updateUser };

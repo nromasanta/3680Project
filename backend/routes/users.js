@@ -1,5 +1,5 @@
 import express from 'express';
-import { getAllUsers, getSingleUser, createUser, loginUser } from '../controllers/userController.js';
+import { getAllUsers, getSingleUser, createUser, loginUser, updateUser} from '../controllers/userController.js';
 
 
 const router = express.Router()
@@ -7,6 +7,8 @@ const router = express.Router()
 router.post('/', createUser);
 
 router.post('/login', loginUser);
+
+router.post('/update', updateUser);
 
 //http://localhost:4000/api/users/
 router.get('/', getAllUsers)

@@ -1,12 +1,14 @@
 import express from 'express';
-import { createComment, findQuizComments, findUserComments, findRandomComment } from '../controllers/commentController.js';
+import { createComment, findQuizComments, findUserComments, findRandomComment, updateLike} from '../controllers/commentController.js';
 
 
 const router = express.Router();
 
 router.post('/', createComment);
 
-router.get('/quiz', findQuizComments);
+router.post('/quiz', findQuizComments);
+
+router.post('/like', updateLike)
 
 router.get('/user', findUserComments);
 

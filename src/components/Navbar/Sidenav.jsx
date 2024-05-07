@@ -5,7 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../auth/authProvider';
 import './Navbar.css';
 import { Menu, Settings } from 'lucide-react';
-import { PencilLine, List, Sparkles, Sword } from 'lucide-preact';
+//import { PencilLine, List, Sparkles, Sword } from 'lucide-preact';
 
 const Sidenav = ({ children }) => {
   const [isOpen, setOpen] = useState(false);
@@ -88,7 +88,7 @@ function Sidebar({ children, onClose }) {
 
           { token ? (
             <>
-              <button href="/">
+              <button href="/settings/:id">
                 <Settings size={36} color='black'/>
               </button>
               <button className='mobile-login-btn' onClick={handleLogout}>Logout</button>
