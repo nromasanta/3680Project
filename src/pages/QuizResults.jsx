@@ -113,10 +113,10 @@ function QuizResults() {
 
       if (alreadyLiked) {
         // If already liked, remove the like
-        await axios.delete(`http://localhost:4000/api/comments/like/${commentId}`);
+        await axios.post(`http://localhost:4000/api/comments/like`, { commentId: commentId, changeLike: 0 });
       } else {
         // If not already liked, add the like
-        await axios.post(`http://localhost:4000/api/comments/like`, { commentId });
+        await axios.post(`http://localhost:4000/api/comments/like`, { commentId: commentId, changeLike: 1 });
       }
 
       // Update the liked state for the comment

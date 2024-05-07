@@ -83,13 +83,21 @@ const findRandomComment = async (req, res) => {
 };
 
 const updateLike = async (req, res) => {
-    console.log("req.body -> ", req.body);
-    const { commentId } = req.body;
+    // console.log("req.body -> ", req.body);
+    const { commentId, changeLike } = req.body;
+    // if changeLike = 0, remove
+    // if changeLike = 1, add
 
-    const oldLikes = await Comment.findOne({_id: commentId});
-
-    const newLikes = oldLikes.likes + 1;
-
+    const oldLikes = await Comment.findOne({ _id: commentId });
+    let newLikes;
+    console.log("Likes before change ==> ", oldLikes.likes);
+    console.log("changeLike ==> ", changeLike);
+    if (changeLike == 1) { // add
+      newLikes = oldLikes.likes + 1;
+    } else { // remove
+      newLikes = oldLikes.likes - 1;
+    }
+    console.log("Likes after change ==> ", newLikes);
     const doc = await Comment.findOneAndUpdate({_id: commentId}, {likes: newLikes}, {new: true});
     console.log("recieved from db ->", doc);
     return res.status(200).json(doc);
