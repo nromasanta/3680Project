@@ -33,7 +33,7 @@ const Desknav = () => {
         { token ? (
           <>
             <li>
-              <Navlink className='' href='/'>
+              <Navlink className='' href='/settings/:id'>
                 Settings
               </Navlink>
             </li>

@@ -17,7 +17,11 @@ const commentSchema = new Schema({
         type: String
     },
     rating: {
-        type: Number
+        type: Number 
+    },
+    likes: {
+        type: Number,
+        default: 0,
     },
 
 }, { timestamps: true });

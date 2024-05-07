@@ -11,6 +11,7 @@ import Landing from './pages/Landing.jsx'
 import Login from './pages/Login.jsx'
 import Signup from './pages/Signup.jsx'
 import Quiz from './pages/Quiz.jsx'
+import Settings from './pages/UserSettings.jsx'
 import QuizResults from './pages/QuizResults.jsx'
 
 const App = () => {
@@ -27,6 +28,7 @@ const App = () => {
               <Route element={<ProtectedRoute />}>
                 <Route path="/create" element={<Create />} />
                 <Route path="/quiz/:id" element ={<Quiz />} />
+                <Route path="/settings/:id" element ={<Settings />} />
                 <Route path="/quiz/result/:id" element ={<QuizResults />} />
               </Route>
               <Route path="/allquizzes" element={<AllQuizzes />} />
