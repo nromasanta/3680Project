@@ -34,11 +34,6 @@ const Footer = () => {
                 Source Code
               </p>
             </Navlink>
-            <Navlink href='/about'>
-              <p className='footer-link'>
-                About
-              </p>
-            </Navlink>
           </div>
           <div>
             <img src={logo} className='footer-logo'/>
