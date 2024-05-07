@@ -105,6 +105,10 @@ const AllQuizzes = () => {
                           <span className="font-bold">Tags: </span> 
                           {item.quizType} 
                         </p>
+                        <p> 
+                          <span className="font-bold">Description: </span> 
+                          {item.quizDescription} 
+                        </p>
                       </div>
                       <div className="all-quiz-questions-r">
                         <p> 

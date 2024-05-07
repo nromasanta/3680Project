@@ -5,16 +5,19 @@ import { useAuth } from "../auth/authProvider";
 import { v4 as uuidv4 } from "uuid";
 import Select from "react-select";
 import "../styles/Create.css";
+import { useNavigate } from "react-router-dom";
 // source on uuid https://stackoverflow.com/questions/71814357/a-right-way-to-use-uuid-as-key-in-react
 
 const Create = () => {
   const { userId } = useAuth();
   const [question, setQuestion] = useState();
   const [title, setTitle] = useState();
+  const [quizDescription, setQuizDescription] = useState();
   const [tag, setTag] = useState();
   const [userQuestions, setUserQuestions] = useState([
     { id: uuidv4(), question: "", answer: "", option2: "", option3: "" },
   ]);
+  const navigate = useNavigate();
   const [quizLength, setQuizLength] = useState(1);
   const [nQuestion, setNQuestion] = useState(2);
   const tags = [
@@ -108,7 +111,8 @@ const Create = () => {
       quizName: title,
       quizLength: quizLength,
       questions: newUserQuestions,
-      quizType: tag
+      quizType: tag,
+      quizDescription: quizDescription
     };
     try {
       console.log("Questions -> ", jsonBody.questions);
@@ -122,6 +126,7 @@ const Create = () => {
     }
     console.log(jsonBody);
     console.log(userQuestions);
+    navigate('/allquizzes');
   };
 
   return (
@@ -139,6 +144,17 @@ const Create = () => {
                   className="create-inputs"
                   placeholder="Quiz Title"
                   onChange={(e) => setTitle(e.target.value)}
+                  required
+                />
+              </label>
+              <label className="create-label ml-2">
+                <input
+                  type="text"
+                  id="text"
+                  className="create-inputs"
+                  maxLength= "50"
+                  placeholder="Quiz Description (max. 50 characters)"
+                  onChange={(e) => setQuizDescription(e.target.value)}
                   required
                 />
               </label>

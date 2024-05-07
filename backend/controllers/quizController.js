@@ -4,12 +4,13 @@ import mongoose from "mongoose";
 const createQuiz = async (req, res) => {
   try {
     console.log("Received: ", req.body);
-    const { author, quizName, quizLength, questions, quizType } = req.body;
+    const { author, quizName, quizLength, questions, quizType, quizDescription } = req.body;
     console.log("author -> ", author);
     console.log("Name -> ", quizName);
     console.log("Length -> ", quizLength);
     console.log("Questions -> ", questions);
     console.log("Type -> ", quizType);
+    console.log("Description -> ", quizDescription);
 
 
     const existingQuizName = await Quiz.find({ quizName: quizName });
@@ -23,7 +24,8 @@ const createQuiz = async (req, res) => {
       quizName: quizName,
       quizType: quizType,
       quizLength: quizLength,
-      questions: questions
+      questions: questions,
+      quizDescription: quizDescription
     });
     console.log("New Quiz Created -->", newQuiz);
 

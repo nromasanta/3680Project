@@ -15,6 +15,10 @@ const quizSchema = new Schema({
         type: Number,
         required: true
     },
+    quizDescription: {
+        type: String,
+        default: null
+    },
     questions: [
         {
             question: {
