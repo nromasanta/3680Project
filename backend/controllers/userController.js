@@ -90,9 +90,24 @@ const getSingleUser = async (req, res) => {
   res.status(200).json(user);
 };
 
+// get a single user by username
+const getUsername = async (req, res) => {
+  const { username } = req.params;
+
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: "No such user" });
+  }
+  const user = await User.findById(id);
+  if (!user) {
+    return res.status(404).json({ error: "User not found" });
+  }
+
+  res.status(200).json(user);
+};
+
 const updateUser = async (req, res) => {
 
-  const { newUsername, newPassword, newEmail, userId } = req.body;
+  const { newUsername, newPassword, currentPassword, newEmail, userId } = req.body;
   console.log("newUsername->", newUsername);
   console.log("newPassword->", newPassword);
   console.log("newEmail->", newEmail);
@@ -109,6 +124,7 @@ const updateUser = async (req, res) => {
   if (newEmail != null) {
     user.email = newEmail;
   }
+
   if (newPassword != null) {
     user.password = newPassword;
   }
@@ -117,4 +133,4 @@ const updateUser = async (req, res) => {
   return res.status(200).json({ message: "User updated" });
 }
 
-export { getAllUsers, getSingleUser, createUser, loginUser, updateUser };
+export { getAllUsers, getSingleUser, createUser, loginUser, updateUser, getUsername };
