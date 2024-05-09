@@ -8,13 +8,13 @@ const Settings = () => {
   const { userId } = useAuth();
 
   // new values the user wants to update
-  const [newUsername, updateNewUsername] = useState(null);
-  const [newPassword, updateNewPassword] = useState(null);
-  const [newEmail, updateNewEmail] = useState(null);
+  const [newUsername, setNewUsername] = useState(null);
+  const [newPassword, setNewPassword] = useState(null);
+  const [newEmail, setNewEmail] = useState(null);
 
   // for the passwords
-  const [currentPassword, updateCurrentPassword] = useState(null);
-  const [retypedNewPassword, updateRetypedNewPassword] = useState(null); // retyped password
+  const [currentPassword, setCurrentPassword] = useState(null);
+  const [retypedNewPassword, setRetypedNewPassword] = useState(null); // retyped password
 
   // make sure that the loggedInUser is initialized, then change loading to false
   const [loggedInUser, setLoggedInUser] = useState(null);
@@ -29,12 +29,6 @@ const Settings = () => {
   const [usernameSuccessMessage, setUsernameSuccessMessage] = useState(null);
   const [emailSuccessMessage, setEmailSuccessMessage] = useState(null);
   const [passwordSuccessMessage, setPasswordSuccessMessage] = useState(null);
-
-  // these are for keeping track of what the user is trying to update
-  const [usernameQuery, setUsernameQuery] = useState(false);
-  const [emailQuery, setEmailQuery] = useState(false);
-  const [passwordQuery, setPasswordQuery] = useState(false);
-
 
   const getUser = async () => {
     try {
@@ -53,7 +47,7 @@ const Settings = () => {
 
   useEffect(() => {
     if (loggedInUser) {
-      console.log("User initialized -> ", loggedInUser);
+      console.log("User initialized");
       setLoading(false);
     }
   }, [loggedInUser]);
@@ -73,24 +67,20 @@ const Settings = () => {
       );
       console.log("Success: ", res.data.message);
 
-      console.log("UQ -> ", usernameQuery);
-      console.log("EQ -> ", emailQuery);
-      console.log("PQ -> ", passwordQuery);
       // set success messages and reset state variables
       if (newUsername) {
         setUsernameSuccessMessage("Username changed");
         setEmailSuccessMessage(null);
         setPasswordSuccessMessage(null);
         document.getElementById("new-username").value = null;
-        updateNewUsername(null);
+        setNewUsername(null);
 
       } else if (newEmail) {
-        console.log("Email success...");
         setEmailSuccessMessage("Email changed");
         setUsernameSuccessMessage(null);
         setPasswordSuccessMessage(null);
         document.getElementById("new-email").value = null;
-        updateNewEmail(null);
+        setNewEmail(null);
 
       } else if (newPassword) {
         setPasswordSuccessMessage("Password changed");
@@ -99,9 +89,9 @@ const Settings = () => {
         document.getElementById("current-password").value = null;
         document.getElementById("new-password").value = null;
         document.getElementById("retyped-new-password").value = null;
-        updateCurrentPassword(null);
-        updateNewPassword(null);
-        updateRetypedNewPassword(null);
+        setCurrentPassword(null);
+        setNewPassword(null);
+        setRetypedNewPassword(null);
       }
       getUser();
     } catch (err) {
@@ -112,7 +102,6 @@ const Settings = () => {
   // handlePasswordSubmit -> verifyCurrentPassword -> updateUserInfo
   const handlePasswordSubmit = (e) => {
     e.preventDefault();
-    console.log("Verifying passwords");
     if (currentPassword && newPassword && retypedNewPassword) {
       if (newPassword && retypedNewPassword) {
         if (retypedNewPassword !== newPassword) {
@@ -120,7 +109,6 @@ const Settings = () => {
           setPasswordErrorMessage(
             "newPassword and retypedNewPassword do not match"
           );
-          setPasswordQuery(false);
         } else {
           console.log("Passwords match, submit");
           setPasswordErrorMessage(null);
@@ -134,22 +122,17 @@ const Settings = () => {
 
   const verifyCurrentPassword = async () => {
     try {
-      console.log("Current password -> ", currentPassword);
       const jsonPassword = { password: currentPassword };
       const res = await axios.post(
         `http://localhost:4000/api/users/checkPassword/${userId}`,
         jsonPassword
       );
-
-      console.log("res status-> ", res.status);
       // status
       // 201 = wrong password
       // 200 = correct password
       if (res.status === 201) {
-        setPasswordQuery(false);
         setPasswordErrorMessage("Incorrect current password entered");
       } else if (res.status === 200) {
-        setPasswordQuery(true);
         updateUserInfo();
       }
     } catch (err) {
@@ -170,13 +153,10 @@ const Settings = () => {
         // status codes:
         // 201 = username in use
         // 200 = username not in use
-        console.log("Status ->", res.status);
         if (res.status === 201) {
-          setUsernameQuery(false);
           setUsernameErrorMessage("Username already taken");
         } else {
           setUsernameErrorMessage(null);
-          setUsernameQuery(true);
           updateUserInfo();
         }
       } catch (err) {
@@ -198,14 +178,9 @@ const Settings = () => {
         // status codes:
         // 201 = email in use
         // 200 = email not in use
-        console.log("Status ->", res.status);
         if (res.status === 201) {
-          setEmailQuery(false);
           setEmailErrorMessage("Email already in use");
         } else {
-            console.log("Email query...");
-          setEmailQuery(true);
-          console.log("Email query ->", emailQuery);
           setEmailErrorMessage(null);
           updateUserInfo();
         }
@@ -214,6 +189,38 @@ const Settings = () => {
       }
     }
   };
+
+
+  const resetMessages = () => {
+
+    // reset error messages
+    setUsernameErrorMessage(null);
+    setEmailErrorMessage(null);
+    setPasswordErrorMessage(null);
+
+    // reset success messages
+    setUsernameSuccessMessage(null);
+    setEmailSuccessMessage(null);
+    setPasswordSuccessMessage(null);
+  
+  };
+
+
+  const updateNewUsername = (value) => {
+    setNewUsername(value);
+    resetMessages();
+  };
+
+  const updateNewEmail = (value) => {
+    setNewEmail(value);
+    resetMessages();
+  };
+
+  const updateNewPassword = (value) => {
+    setNewPassword(value);
+    resetMessages();
+  };
+
 
 
 
@@ -273,7 +280,7 @@ const Settings = () => {
                 type="text"
                 id="current-password"
                 placeholder="Current Password"
-                onChange={(e) => updateCurrentPassword(e.target.value)}
+                onChange={(e) => setCurrentPassword(e.target.value)}
               />
             </label>
             <label>
@@ -291,7 +298,7 @@ const Settings = () => {
                 type="text"
                 id="retyped-new-password"
                 placeholder="Retype New Password"
-                onChange={(e) => updateRetypedNewPassword(e.target.value)}
+                onChange={(e) => setRetypedNewPassword(e.target.value)}
               />
             </label>
             <button type="submit">Update</button>
