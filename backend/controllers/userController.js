@@ -91,23 +91,30 @@ const getSingleUser = async (req, res) => {
 };
 
 // get a single user by username
-const getUsername = async (req, res) => {
-  const { username } = req.params;
+const checkExistingUserInfo = async (req, res) => {
+  const { valueToCheck, type } = req.body;
+  console.log("Received value ==>", valueToCheck, " Type ==>", type);
 
-  if (!mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(404).json({ error: "No such user" });
-  }
-  const user = await User.findById(id);
-  if (!user) {
-    return res.status(404).json({ error: "User not found" });
+  if (type === "username") {
+    const user = await User.find({ username: valueToCheck });
+    if (user.length > 0) {
+      console.log("Found user -> ", user);
+      return res.status(201).json({ error: `Username ${valueToCheck} already exists` });
+    }
+  } else if (type === "email") {
+      const user = await User.find({email: valueToCheck});
+      if (user.length > 0) {
+        console.log("Found user -> ", user);
+        return res.status(201).json({error: `Email ${valueToCheck} already in use`});
+      }
   }
 
-  res.status(200).json(user);
+  res.status(200).json({message: `No exiting ${type} found`});
 };
 
 const updateUser = async (req, res) => {
 
-  const { newUsername, newPassword, currentPassword, newEmail, userId } = req.body;
+  const { newUsername, newPassword, newEmail, userId } = req.body;
   console.log("newUsername->", newUsername);
   console.log("newPassword->", newPassword);
   console.log("newEmail->", newEmail);
@@ -133,4 +140,35 @@ const updateUser = async (req, res) => {
   return res.status(200).json({ message: "User updated" });
 }
 
-export { getAllUsers, getSingleUser, createUser, loginUser, updateUser, getUsername };
+const checkPassword = async (req, res) => {
+  console.log("req.body ->", req.body);
+  console.log("req.params ->", req.params);
+  const { password } = req.body;
+  const { id } = req.params;
+
+  const myUser = await User.findById(id);
+  console.log("MyUser-> ", myUser);
+  if (!myUser) {
+    return res.status(201).send();
+  }
+  // console.log("received -> ", req.body);
+  // console.log("got from db ->", myUser);
+  // console.log("ID -> ", id);
+
+  bcrypt.compare(password, myUser.password, function (err, result) {
+    console.log("Result -----> ", result);
+    if (!result) {
+      console.log("passwords do not match!");
+      return res.status(201).send();
+    } else if (result) {
+      console.log("passwords match!");
+      return res.status(200).send();
+    } else if (err) {
+      console.log("Unknown error logging in ->", err);
+      return res.status(400).send();
+    }
+  });
+};
+
+
+export { getAllUsers, getSingleUser, createUser, loginUser, updateUser, checkExistingUserInfo, checkPassword };
