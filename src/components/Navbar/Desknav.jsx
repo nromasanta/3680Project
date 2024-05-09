@@ -7,7 +7,7 @@ import { useAuth } from '../../auth/authProvider'
 import { Navigate } from 'react-router-dom';
 
 const Desknav = () => {
-  const { token, logout } = useAuth(); 
+  const { token, logout, userId } = useAuth(); 
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -33,7 +33,7 @@ const Desknav = () => {
         { token ? (
           <>
             <li>
-              <Navlink className='' href='/settings/:id'>
+              <Navlink className='' href={`/settings/${userId}`}>
                 Settings
               </Navlink>
             </li>
