@@ -2,10 +2,12 @@ import { React, useState, useEffect } from 'react';
 import axios from 'axios';
 // import AuthContext from '../auth/AuthContext';
 import { useAuth } from '../auth/authProvider';
-
+import { useParams } from 'react-router-dom';
 
 const Settings = () => {
-  const { userId } = useAuth();
+    //const { userId } = useAuth();
+    const params = useParams();
+    const userId = params.id;
 
   // new values the user wants to update
   const [newUsername, setNewUsername] = useState(null);
