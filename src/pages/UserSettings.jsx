@@ -1,8 +1,8 @@
 import { React, useState, useEffect } from 'react';
 import axios from 'axios';
-// import AuthContext from '../auth/AuthContext';
 import { useAuth } from '../auth/authProvider';
 import { useParams } from 'react-router-dom';
+import '../styles/Settings.css';
 
 const Settings = () => {
     //const { userId } = useAuth();
@@ -231,84 +231,139 @@ const Settings = () => {
     return <p>Loading...</p>;
   } else {
     return (
-      <div className="temp-page container">
-        {/* Current Information */}
-        <div>
-          <h1> Hello, {loggedInUser.data.username}</h1>
-          <h1> Email: {loggedInUser.data.email}</h1>
-        </div>
+      <div className="settings-page content set-container">
+
         {/* ---Username--- */}
-        <div className="flex-col border border-red-500">
-          <form onSubmit={handleUsernameSubmit}>
-            <label>
-              Enter New Username:
-              <input
-                type="text"
-                id="new-username"
-                placeholder="New Username"
-                onChange={(e) => updateNewUsername(e.target.value)}
-              />
-            </label>
-            <button type="submit">Change Username</button>
-            {usernameSuccessMessage && <p>{usernameSuccessMessage}</p>}
-            {usernameErrorMessage && <p>{usernameErrorMessage}</p>}
-          </form>
+        <div className="settings-page-container settings-user">
+          <div className="settings-user-left">
+            <div className="settings-user-content settings-user-1">
+              <p className="settings-user-text">Username</p>
+              <p className="settings-user-text-2">
+                Usernames allow others to see who created their favorite quizzes.
+              </p>
+            </div>
+          </div>
+
+          <div className="settings-user-right">
+            <div className="settings-user-content settings-user-2">
+              <form className="settings-user-form" onSubmit={handleUsernameSubmit}>
+                <label className="settings-user-label">
+                  <p className="settings-user-label-text">USERNAME</p>
+                  <input
+                    type="text"
+                    className="settings-inputs"
+                    id="new-username"
+                    placeholder={loggedInUser.data.username}
+                    onChange={(e) => updateNewUsername(e.target.value)}
+                  />
+                </label>
+                <button type="submit" className="settings-user-button">
+                  Save Changes
+                </button>
+                {usernameSuccessMessage && <p>{usernameSuccessMessage}</p>}
+                {usernameErrorMessage && <p>{usernameErrorMessage}</p>}
+              </form>
+            </div>
+          </div>
+          
         </div>
+        {/* -------------- */}
 
         {/* ---Email--- */}
-        <div className="flex-col border border-red-500">
-          <form onSubmit={handleEmailSubmit}>
-            <label>
-              Enter New Email:
-              <input
-                type="text"
-                id="new-email"
-                placeholder="New Email"
-                onChange={(e) => updateNewEmail(e.target.value)}
-              />
-            </label>
-            <button type="submit">Change Email</button>
-            {emailSuccessMessage && <p>{emailSuccessMessage}</p>}
-            {emailErrorMessage && <p>{emailErrorMessage}</p>}
-          </form>
+        <div className="settings-page-container settings-user">
+          <div className="settings-user-left">
+            <div className="settings-user-content settings-user-1">
+              <p className="settings-user-text">Personal Information</p>
+              <p className="settings-user-text-2">
+                This information is private 
+                and will not be shared with other users. 
+                Read the QuizCraft Privacy Notice anytime!
+              </p>
+            </div>
+          </div>
+
+          <div className="settings-user-right">
+            <div className="settings-user-content settings-user-2">
+              <form className="settings-user-form" onSubmit={handleEmailSubmit}>
+                <label className="settings-user-label">
+                  <p className="settings-user-label-text">EMAIL ADDRESS</p>
+                  <input
+                    type="text"
+                    className="settings-inputs"
+                    id="new-email"
+                    placeholder={loggedInUser.data.email}
+                    onChange={(e) => updateNewEmail(e.target.value)}
+                  />
+                </label>
+                <button type="submit" className="settings-user-button">
+                  Save Changes
+                </button>
+                {emailSuccessMessage && <p>{emailSuccessMessage}</p>}
+                {emailErrorMessage && <p>{emailErrorMessage}</p>}
+              </form>
+            </div>
+          </div>
+          
         </div>
+        {/* -------------- */}
 
         {/* ---Passwords--- */}
-        <div className="flex-col border border-red-500">
-          <form onSubmit={handlePasswordSubmit}>
-            <label>
-              Enter Current Password:
-              <input
-                type="text"
-                id="current-password"
-                placeholder="Current Password"
-                onChange={(e) => setCurrentPassword(e.target.value)}
-              />
-            </label>
-            <label>
-              Enter New Password:
-              <input
-                type="text"
-                id="new-password"
-                placeholder="New Password"
-                onChange={(e) => updateNewPassword(e.target.value)}
-              />
-            </label>
-            <label>
-              Retype New Password:
-              <input
-                type="text"
-                id="retyped-new-password"
-                placeholder="Retype New Password"
-                onChange={(e) => setRetypedNewPassword(e.target.value)}
-              />
-            </label>
-            <button type="submit">Update</button>
-            {passwordSuccessMessage && <p>{passwordSuccessMessage}</p>}
-            {passwordErrorMessage && <p>{passwordErrorMessage}</p>}
-          </form>
+        <div className="settings-page-container settings-user">
+          <div className="settings-user-left">
+            <div className="settings-user-content settings-user-1">
+              <p className="settings-user-text">Password</p>
+              <p className="settings-user-text-2">
+              We recommend that you periodically 
+              update your password to help prevent 
+              unauthorized access to your account.
+              </p>
+            </div>
+          </div>
+
+          <div className="settings-user-right">
+            <div className="settings-user-content settings-user-2">
+              <form className="settings-user-form" onSubmit={handlePasswordSubmit}>
+                <label className="settings-user-label">
+                  <p className="settings-user-label-text">CURRENT PASSWORD</p>
+                  <input
+                    type="text"
+                    className="settings-inputs"
+                    id="current-password"
+                    onChange={(e) => setCurrentPassword(e.target.value)}
+                  />
+                </label>
+
+                <label className="settings-user-label">
+                  <p className="settings-user-label-text">NEW PASSWORD</p>
+                  <input
+                    type="text"
+                    className="settings-inputs"
+                    id="new-password"
+                    onChange={(e) => updateNewPassword(e.target.value)}
+                  />
+                </label>
+
+                <label className="settings-user-label">
+                  <p className="settings-user-label-text">CONFIRM NEW PASSWORD</p>
+                  <input
+                    type="text"
+                    className="settings-inputs"
+                    id="retyped-new-password"
+                    onChange={(e) => setRetypedNewPassword(e.target.value)}
+                  />
+                </label>
+
+                <button type="submit" className="settings-user-button">
+                  Save Changes
+                </button>
+                {passwordSuccessMessage && <p>{passwordSuccessMessage}</p>}
+                {passwordErrorMessage && <p>{passwordErrorMessage}</p>}
+
+              </form>
+            </div>
+          </div>
+          
         </div>
-        {/* --------------- */}
       </div>
     );
   }

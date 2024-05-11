@@ -1,0 +1,140 @@
+.settings-page {
+  width: 100%;
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  color: #000;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 30px;
+  margin-bottom: 30px;
+}
+
+.settings-page-container {
+  display: flex;
+  background-color: white;
+  height: 100%;
+  width: 100%;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.settings-user-left {
+  width: 50%;
+  background-color: #211e1f;
+}
+
+.settings-user-right {
+  width: 50%;
+}
+
+.settings-user-content {
+  padding: 3rem;
+}
+
+.settings-user-1 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.settings-user-2 {
+  width: 100%;
+  height: 100%;
+}
+
+.settings-user-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 100%;
+  gap: 1rem;
+}
+
+.settings-user-text {
+  color: white;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.settings-user-text-2 {
+  color: gainsboro;
+  font-size: 16px;
+  font-weight: 300;
+}
+
+.settings-user-label {
+  display: flex;
+  flex-direction: column;
+  border: 2px solid gray;
+  border-radius: 3px;
+  padding: 3px 5px 3px 8px;
+  width: 90%;
+}
+
+.settings-inputs {
+  outline: none;
+  border: none;
+  background-color: transparent;
+}
+
+.settings-inputs:focus::placeholder {
+  color: transparent;
+  transition: 0.1s ease;
+}
+
+.settings-inputs::placeholder {
+  color: black;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+.settings-user-label-text {
+  font-size: 14px;
+  color: darkgray;
+  font-weight: 800;
+}
+
+.settings-user-button {
+  width: 200px;
+  color: #000;
+  border: 2px solid gray;
+  border-radius: 3px;
+  padding: 3px 12px 3px 12px;
+}
+
+.settings-user-button:hover {
+  background-color: #333433;
+  transition: 0.2s ease;
+  color: #fff;
+}
+
+@media screen and (max-width: 800px) {
+  .settings-page {
+    gap: 2rem;
+  }
+  
+  .settings-page-container {
+    flex-direction: column;
+  }
+
+  .settings-user-left,
+  .settings-user-right {
+    width: 100%;
+  }
+
+  .settings-user-content {
+    padding: 2rem;
+  }
+
+  .settings-user-label {
+    width: 100%;
+  }
+
+  .settings-user-button {
+    padding: 8px 3px 8px 3px;
+  }
+
+}

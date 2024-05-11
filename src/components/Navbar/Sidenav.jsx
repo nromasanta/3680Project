@@ -5,7 +5,6 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../auth/authProvider';
 import './Navbar.css';
 import { Menu, Settings } from 'lucide-react';
-//import { PencilLine, List, Sparkles, Sword } from 'lucide-preact';
 
 const Sidenav = ({ children }) => {
   const [isOpen, setOpen] = useState(false);
@@ -53,13 +52,14 @@ const Sidenav = ({ children }) => {
 function Sidebar({ children, onClose }) {
   const [expanded, setExpanded] = useState(true);
 
-  const { token, logout } = useAuth();
+  const { token, logout, userId } = useAuth(); 
   const location = useLocation();
   const navigate = useNavigate();
 
   const handleLogout = () => {
     logout();
     navigate('/login');
+
   };
 
   const handleButtonClick = () => {
@@ -88,8 +88,10 @@ function Sidebar({ children, onClose }) {
 
           { token ? (
             <>
-              <button href="/settings/:id">
-                <Settings size={36} color='black'/>
+              <button>
+                <a href={`/settings/${userId}`}>
+                  <Settings size={36} color='black'/>
+                </a>
               </button>
               <button className='mobile-login-btn' onClick={handleLogout}>Logout</button>
             </>
