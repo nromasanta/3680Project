@@ -230,27 +230,28 @@ function QuizResults() {
               {comments.map((item, index) => (
                 <div key={index} className="quiz-each-comment">
                   <div className="quiz-each-left">
-                    <p className="quiz-comment-username">Username: {item.username}</p>
+                    <p className="quiz-comment-username">@{item.username}</p>
                     <div className="quiz-comment-comment">
-                      <p>Comment:</p>
                       <p className="flex flex-wrap">{item.comment}</p>
                     </div>
                   </div>
-                  <div className="quiz-each-middle">
-                    <p className="quiz-comment-rating">Rating: {item.rating} stars</p>
-                    <p
-                      className="quiz-comment-likes cursor-pointer"
-                    >
-                      {likes[index]} likes
-                    </p>
-                  </div>
                   <div className="quiz-each-right">
-                  <button onClick={() => handleLike(item._id)}>
-                    <FontAwesomeIcon 
-                    icon={likedComments[item._id] ? solidHeart : regularHeart} 
-                    className="results-heart"
-                    />
-                  </button>
+                    <div className="quiz-each-right-1">
+                      <button onClick={() => handleLike(item._id)}>
+                        <FontAwesomeIcon 
+                        icon={likedComments[item._id] ? solidHeart : regularHeart} 
+                        className="results-heart"
+                        />
+                      </button> 
+                      <p
+                        className="quiz-comment-likes cursor-pointer"
+                      >
+                        {likes[index]}
+                      </p>
+                    </div>
+                    <div className="quiz-each-right-2">
+                      <p className="quiz-comment-rating">{item.rating} stars</p>
+                    </div>
                   </div>
                 </div>
               ))}

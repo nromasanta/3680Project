@@ -64,10 +64,8 @@
 
 .results-leaderboard {
   display: flex;
-  justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 430px;
 }
 
 .results-lb-head {
@@ -191,23 +189,31 @@
   flex-direction: column;
   width: 90%;
   align-items: center;
-  height: 430px;
   overflow-y: scroll;
 }
 
 .quiz-each-comment {
   display: flex;
-  gap: 1.5rem;
+  flex-direction: column;
+  gap: 0.5rem;
   width: 100%;
   padding: 8px;
   border-bottom: 1px solid #eaeaea;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
 }
 
 .quiz-comment-comment {
   display: flex;
   flex-direction: column;
+}
+.quiz-comment-username {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.quiz-comment-likes {
+  padding-left: 0.5px;
 }
 
 .quiz-each-left {
@@ -215,26 +221,20 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  gap: 0.5rem;
-  width: 45%;
-}
-
-.quiz-each-middle {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 0.5rem;
-  width: 45%;
+  gap: 0.25rem;
 }
 
 .quiz-each-right {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: flex-start;
+  gap: 4rem;
+}
+
+.quiz-each-right-1 {
+  display: flex;
+  flex-direction: row;
   gap: 0.5rem;
-  width: 10%;
 }
 
 
@@ -269,5 +269,21 @@
   .second-place,
   .third-place {
     font-size: 22px;
+  }
+
+  .results-comments-head {
+    width: 100%;
+  }
+
+  .results-comments-actual {
+    gap: 1rem;
+    width: 100%;
+  }
+
+  #comment {
+    border: 2px solid #b1b1b1;
+    width: 100%;
+    height: 100%;
+    padding: 8px;
   }
 }
